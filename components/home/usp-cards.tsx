@@ -72,7 +72,7 @@ export function UspCards() {
               <ArrowUpRight className="text-muted-foreground/60 size-5" />
             </div>
 
-            <h3 className="mt-5 text-xl font-semibold tracking-tight">
+            <h3 className="mt-5 font-serif text-2xl font-medium tracking-tight">
               Upload your own design
             </h3>
             <p className="text-muted-foreground mt-2 max-w-sm text-sm">

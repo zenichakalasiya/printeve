@@ -24,7 +24,7 @@ export function SupportCta() {
         <div className="bg-primary text-primary-foreground relative overflow-hidden rounded-2xl px-6 py-12 sm:px-12">
           <div className="relative grid gap-8 lg:grid-cols-2 lg:items-center">
             <div className="flex flex-col gap-4">
-              <h2 className="text-3xl font-bold tracking-tight text-balance">
+              <h2 className="font-serif text-3xl font-medium tracking-tight text-balance sm:text-4xl">
                 Ready to bring your design to life?
               </h2>
               <p className="text-primary-foreground/80 max-w-md text-pretty">

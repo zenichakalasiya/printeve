@@ -8,18 +8,31 @@ import {
   Tag,
 } from "lucide-react";
 
+export type Subcategory = { slug: string; name: string };
+
 export type Category = {
   slug: string;
   name: string;
   description: string;
   icon: LucideIcon;
-  items: string[];
+  subcategories: Subcategory[];
 };
+
+function sub(name: string): Subcategory {
+  return {
+    name,
+    slug: name
+      .toLowerCase()
+      .replace(/&/g, "and")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, ""),
+  };
+}
 
 /**
  * The six top-level product categories from the FigJam "Product Category"
- * progressive-disclosure list. Sub-items drive the navbar mega-menu and the
- * homepage category cards.
+ * progressive-disclosure list. Subcategories drive the navbar mega-menu, the
+ * category pages, and the catalog filters.
  */
 export const categories: Category[] = [
   {
@@ -27,41 +40,59 @@ export const categories: Category[] = [
     name: "Marketing Materials",
     description: "Cards, brochures and posters that get you noticed.",
     icon: Megaphone,
-    items: ["Business Cards", "Brochures", "Flyers", "Posters", "Catalogues"],
+    subcategories: [
+      "Business Cards",
+      "Brochures",
+      "Flyers",
+      "Posters",
+      "Catalogues",
+    ].map(sub),
   },
   {
     slug: "stationery",
     name: "Stationery",
     description: "Branded everyday essentials for your business.",
     icon: FileText,
-    items: ["Letterheads", "Envelopes", "Notepads", "Documents", "Certificates"],
+    subcategories: [
+      "Letterheads",
+      "Envelopes",
+      "Notepads",
+      "Documents",
+      "Certificates",
+    ].map(sub),
   },
   {
     slug: "labels-stickers",
     name: "Labels & Stickers",
     description: "Custom labels and stickers for any surface.",
     icon: Sticker,
-    items: ["Stickers", "Product Labels", "Custom Labels"],
+    subcategories: ["Stickers", "Product Labels", "Custom Labels"].map(sub),
   },
   {
     slug: "publishing",
     name: "Publishing",
     description: "Magazines, booklets and catalogues, print-ready.",
     icon: BookOpen,
-    items: ["Magazines", "Booklets", "Catalogues"],
+    subcategories: ["Magazines", "Booklets", "Catalogues"].map(sub),
   },
   {
     slug: "cards-invitations",
     name: "Cards & Invitations",
     description: "Make every occasion memorable.",
     icon: Mail,
-    items: ["Greeting Cards", "Invitation Cards", "Postcards"],
+    subcategories: ["Greeting Cards", "Invitation Cards", "Postcards"].map(sub),
   },
   {
     slug: "tags-accessories",
     name: "Tags & Accessories",
     description: "Tags, badges and passes for events and products.",
     icon: Tag,
-    items: ["Hang Tags", "ID Cards", "Badges", "Tickets", "Coupons"],
+    subcategories: ["Hang Tags", "ID Cards", "Badges", "Tickets", "Coupons"].map(
+      sub
+    ),
   },
 ];
+
+export function getCategory(slug: string) {
+  return categories.find((c) => c.slug === slug);
+}

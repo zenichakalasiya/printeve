@@ -53,7 +53,9 @@ export function SiteHeader() {
                                 {category.name}
                               </span>
                               <span className="text-muted-foreground line-clamp-1 text-xs">
-                                {category.items.join(" · ")}
+                                {category.subcategories
+                                  .map((s) => s.name)
+                                  .join(" · ")}
                               </span>
                             </span>
                           </Link>

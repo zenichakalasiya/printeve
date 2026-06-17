@@ -1,12 +1,22 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Fraunces, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { Toaster } from "@/components/ui/sonner";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+// Editorial / Magazine aesthetic: a display serif paired with a clean sans.
+const fontSerif = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+const fontSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-dm-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "PrintEve — On-demand custom printing",
@@ -19,7 +29,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body
+        className={`${fontSans.variable} ${fontSerif.variable} font-sans antialiased`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

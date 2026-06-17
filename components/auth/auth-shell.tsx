@@ -25,7 +25,9 @@ export function AuthShell({
         <div className="bg-card flex flex-col justify-center p-6 sm:p-10">
           <div className="mx-auto w-full max-w-sm">
             <div className="flex flex-col gap-2">
-              <h1 className="text-2xl font-bold tracking-tight">{title}</h1>
+              <h1 className="font-serif text-3xl font-medium tracking-tight">
+                {title}
+              </h1>
               <p className="text-muted-foreground text-sm">{description}</p>
             </div>
             <div className="mt-8">{children}</div>
@@ -39,7 +41,7 @@ export function AuthShell({
             <Logo className="text-primary-foreground [&_span:first-child]:bg-primary-foreground [&_span:first-child]:text-primary" />
           </div>
           <div className="relative flex flex-col gap-6">
-            <p className="text-2xl font-semibold text-balance">
+            <p className="font-serif text-3xl font-medium text-balance">
               Print anything, your way — designed, ordered and tracked in one
               place.
             </p>

@@ -13,7 +13,9 @@ export function Logo({ className }: { className?: string }) {
       <span className="bg-primary text-primary-foreground flex size-8 items-center justify-center rounded-md">
         <Printer className="size-5" />
       </span>
-      <span className="text-lg tracking-tight">{siteConfig.name}</span>
+      <span className="font-serif text-xl font-semibold tracking-tight">
+        {siteConfig.name}
+      </span>
     </Link>
   );
 }

@@ -34,7 +34,7 @@ export function Categories() {
                     </p>
                   </div>
                   <p className="text-muted-foreground border-t pt-3 text-xs">
-                    {category.items.join(" · ")}
+                    {category.subcategories.map((s) => s.name).join(" · ")}
                   </p>
                 </Card>
               </Link>

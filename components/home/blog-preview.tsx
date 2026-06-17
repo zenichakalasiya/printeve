@@ -48,7 +48,7 @@ export function BlogPreview() {
                   <Badge variant="secondary">{post.category}</Badge>
                   <span>{post.readTime}</span>
                 </div>
-                <h3 className="text-lg leading-snug font-semibold">
+                <h3 className="font-serif text-xl leading-snug font-medium">
                   <Link
                     href={`/blogs/${post.slug}`}
                     className="hover:text-primary transition-colors"
