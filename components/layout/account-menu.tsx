@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { User, Package, Settings, LogIn, UserPlus } from "lucide-react";
+import { User, Package, LogIn, UserPlus, LogOut, Truck } from "lucide-react";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -12,13 +13,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useAuth } from "@/components/providers/auth-provider";
 
-/**
- * Account entry point in the navbar. Logged-out state shows Login / Sign up;
- * once auth is wired the same trigger becomes the profile dropdown below.
- * Backend isn't built yet, so this renders the logged-out + menu shell only.
- */
 export function AccountMenu() {
+  const { user, hydrated, logout } = useAuth();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -26,35 +25,53 @@ export function AccountMenu() {
           <User className="size-5" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-52">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <Link href="/login">
-            <LogIn /> Login
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/signup">
-            <UserPlus /> Sign up
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <Link href="/account">
-            <User /> Profile
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/orders">
-            <Package /> Orders
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/account/settings">
-            <Settings /> Settings
-          </Link>
-        </DropdownMenuItem>
+      <DropdownMenuContent align="end" className="w-56">
+        {hydrated && user ? (
+          <>
+            <DropdownMenuLabel className="flex flex-col">
+              <span className="truncate">{user.name}</span>
+              <span className="text-muted-foreground truncate text-xs font-normal">
+                {user.email}
+              </span>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem asChild>
+              <Link href="/track">
+                <Truck /> Track Order
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/orders">
+                <Package /> My Orders
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              variant="destructive"
+              onClick={() => {
+                logout();
+                toast.success("You've been logged out.");
+              }}
+            >
+              <LogOut /> Log out
+            </DropdownMenuItem>
+          </>
+        ) : (
+          <>
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem asChild>
+              <Link href="/login">
+                <LogIn /> Login
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/signup">
+                <UserPlus /> Sign up
+              </Link>
+            </DropdownMenuItem>
+          </>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );

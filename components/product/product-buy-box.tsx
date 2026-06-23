@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Star,
   ShoppingCart,
@@ -18,6 +19,7 @@ import {
   productOptions,
   productTiers,
 } from "@/lib/data/products";
+import { useCart } from "@/components/providers/cart-provider";
 import { formatPrice } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -27,6 +29,8 @@ import { UploadDropzone } from "@/components/product/upload-dropzone";
 import { PriceDetails } from "@/components/product/price-details";
 
 export function ProductBuyBox({ product }: { product: Product }) {
+  const router = useRouter();
+  const { addItem, setOpen } = useCart();
   const options = React.useMemo(() => productOptions(product), [product]);
   const tiers = React.useMemo(() => productTiers(product), [product]);
 
@@ -53,13 +57,29 @@ export function ProductBuyBox({ product }: { product: Product }) {
     setSelected((s) => ({ ...s, [key]: name }));
   }
 
-  function addToCart() {
-    toast.success(`Added ${qty.toLocaleString("en-IN")} × ${product.name} to cart.`, {
-      description: "Cart isn't connected to the backend yet.",
-    });
+  function buildCartItem() {
+    return {
+      slug: product.slug,
+      name: product.name,
+      image: product.image,
+      category: product.category,
+      categorySlug: product.categorySlug,
+      options: options.map((o) => ({ label: o.label, value: selected[o.key] })),
+      unit: product.units[0],
+      surcharge: surcharges.reduce((a, b) => a + b, 0),
+      qty,
+    };
   }
+
+  function addToCart() {
+    addItem(buildCartItem());
+    setOpen(true);
+    toast.success(`Added ${qty.toLocaleString("en-IN")} × ${product.name} to cart.`);
+  }
+
   function buyNow() {
-    toast.info("Checkout isn't wired up yet — coming soon.");
+    addItem(buildCartItem());
+    router.push("/checkout");
   }
 
   return (

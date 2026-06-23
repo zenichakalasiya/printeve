@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Check, Loader2, X } from "lucide-react";
 import { toast } from "sonner";
 
@@ -12,6 +13,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { PasswordInput } from "@/components/ui/password-input";
 import { SocialAuth, AuthDivider } from "@/components/auth/social-auth";
+import { useAuth } from "@/components/providers/auth-provider";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -22,6 +24,15 @@ const rules = [
 ];
 
 export function SignupForm() {
+  const router = useRouter();
+  const { login } = useAuth();
+  const [next, setNext] = React.useState("/");
+
+  React.useEffect(() => {
+    const param = new URLSearchParams(window.location.search).get("next");
+    if (param) setNext(param);
+  }, []);
+
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -45,8 +56,9 @@ export function SignupForm() {
     if (!validate()) return;
     setLoading(true);
     setTimeout(() => {
-      setLoading(false);
-      toast.info("Sign-up isn't connected to the backend yet.");
+      login({ name: name.trim(), email });
+      toast.success("Account created — welcome to PrintEve!");
+      router.push(next);
     }, 700);
   }
 

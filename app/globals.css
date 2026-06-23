@@ -14,3 +14,22 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Page-transition loader — indeterminate progress bar */
+@keyframes pe-loading-bar {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(320%);
+  }
+}
+.pe-loading-bar {
+  animation: pe-loading-bar 1s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pe-loading-bar {
+    animation: none;
+  }
+}

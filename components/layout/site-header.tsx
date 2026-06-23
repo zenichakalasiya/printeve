@@ -21,8 +21,14 @@ import { SearchBar } from "@/components/layout/search-bar";
 import { AccountMenu } from "@/components/layout/account-menu";
 import { ModeToggle } from "@/components/layout/mode-toggle";
 import { MobileNav } from "@/components/layout/mobile-nav";
+import { MiniCart } from "@/components/cart/mini-cart";
+import { useCart } from "@/components/providers/cart-provider";
+import { useAuth } from "@/components/providers/auth-provider";
 
 export function SiteHeader() {
+  const { totals, setOpen, hydrated } = useCart();
+  const { user, hydrated: authHydrated } = useAuth();
+
   return (
     <header className="bg-background/95 supports-[backdrop-filter]:bg-background/80 sticky top-0 z-50 w-full border-b backdrop-blur">
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
@@ -88,26 +94,28 @@ export function SiteHeader() {
           <Button
             variant="ghost"
             size="icon"
-            asChild
             className="relative"
             aria-label="Cart"
+            onClick={() => setOpen(true)}
           >
-            <Link href="/cart">
-              <ShoppingCart className="size-5" />
+            <ShoppingCart className="size-5" />
+            {hydrated && totals.count > 0 && (
               <Badge className="absolute -top-0.5 -right-0.5 size-4 rounded-full px-0 tabular-nums">
-                0
+                {totals.count}
               </Badge>
-            </Link>
+            )}
           </Button>
           <AccountMenu />
-          <div className="ml-1 hidden items-center gap-2 lg:flex">
-            <Button variant="ghost" asChild>
-              <Link href="/login">Login</Link>
-            </Button>
-            <Button asChild>
-              <Link href="/signup">Sign up</Link>
-            </Button>
-          </div>
+          {authHydrated && !user && (
+            <div className="ml-1 hidden items-center gap-2 lg:flex">
+              <Button variant="ghost" asChild>
+                <Link href="/login">Login</Link>
+              </Button>
+              <Button asChild>
+                <Link href="/signup">Sign up</Link>
+              </Button>
+            </div>
+          )}
         </div>
       </div>
 
@@ -115,6 +123,8 @@ export function SiteHeader() {
       <div className="border-t px-4 py-2 md:hidden">
         <SearchBar />
       </div>
+
+      <MiniCart />
     </header>
   );
 }

@@ -1,0 +1,47 @@
+/* ============================================================
+   PrintEve — Typography tokens
+   Inter, with a Tailwind-derived type scale.
+   ============================================================ */
+:root {
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Weights */
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+  --weight-extra:    800;
+
+  /* Type scale (rem) */
+  --text-xs:   0.75rem;   /* 12 */
+  --text-sm:   0.875rem;  /* 14 */
+  --text-base: 1rem;      /* 16 */
+  --text-lg:   1.125rem;  /* 18 */
+  --text-xl:   1.25rem;   /* 20 */
+  --text-2xl:  1.5rem;    /* 24 */
+  --text-3xl:  1.875rem;  /* 30 */
+  --text-4xl:  2.25rem;   /* 36 */
+  --text-5xl:  3rem;      /* 48 */
+  --text-6xl:  3.75rem;   /* 60 */
+
+  /* Line heights */
+  --leading-tight:   1.1;
+  --leading-snug:    1.25;
+  --leading-normal:  1.5;
+  --leading-relaxed: 1.65;
+
+  /* Letter spacing */
+  --tracking-tight:  -0.02em;
+  --tracking-snug:   -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.05em;
+
+  /* Semantic text roles */
+  --text-display:    var(--weight-bold) var(--text-6xl)/var(--leading-tight) var(--font-sans);
+  --text-h1:         var(--weight-bold) var(--text-4xl)/var(--leading-tight) var(--font-sans);
+  --text-h2:         var(--weight-bold) var(--text-3xl)/var(--leading-snug) var(--font-sans);
+  --text-h3:         var(--weight-semibold) var(--text-xl)/var(--leading-snug) var(--font-sans);
+  --text-body:       var(--weight-regular) var(--text-base)/var(--leading-relaxed) var(--font-sans);
+  --text-label:      var(--weight-medium) var(--text-sm)/var(--leading-normal) var(--font-sans);
+}

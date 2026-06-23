@@ -7,7 +7,7 @@ export const siteConfig = {
 
 export const mainNav = [
   { title: "Products", href: "/products" },
-  { title: "How it works", href: "/how-it-works" },
+  { title: "Track Order", href: "/track" },
   { title: "Blogs", href: "/blogs" },
   { title: "Contact", href: "/contact" },
 ];

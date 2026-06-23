@@ -1,0 +1,24 @@
+<!-- @dsCard group="Type" viewport="700x200" name="Body & labels" subtitle="Body copy, labels, weights" -->
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8" /><link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; padding: 28px; background: var(--color-background); }
+  .stack { display: flex; flex-direction: column; gap: 14px; max-width: 600px; }
+  .body { font: var(--text-body); color: var(--color-text); margin:0; }
+  .muted { font: var(--text-body); color: var(--color-text-muted); margin:0; font-size: var(--text-sm); }
+  .label { font: var(--text-label); color: var(--color-text); margin:0; }
+  .weights { display:flex; gap:20px; }
+  .weights span { color: var(--color-text); }
+  .w4 { font-weight: 400; } .w5 { font-weight: 500; } .w6 { font-weight: 600; } .w7 { font-weight: 700; } .w8 { font-weight: 800; }
+  .cap { font-size: 11px; text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--color-text-subtle); font-weight: 600; }
+</style></head>
+<body>
+<div class="stack">
+  <p class="cap">Body — 16px / 1.65</p>
+  <p class="body">From business cards to bulk packaging, order professional print jobs online with transparent pricing and quality you can trust on every run.</p>
+  <p class="cap">Small / label — 14px</p>
+  <p class="muted">Standard orders are produced within 24–72 hours depending on the product and quantity.</p>
+  <p class="cap">Weights</p>
+  <p class="weights"><span class="w4">Regular</span><span class="w5">Medium</span><span class="w6">Semibold</span><span class="w7">Bold</span><span class="w8">Extra</span></p>
+</div>
+</body></html>

@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -11,10 +12,25 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { PasswordInput } from "@/components/ui/password-input";
 import { SocialAuth, AuthDivider } from "@/components/auth/social-auth";
+import { useAuth } from "@/components/providers/auth-provider";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+function nameFromEmail(email: string) {
+  const handle = email.split("@")[0].replace(/[._-]+/g, " ");
+  return handle.replace(/\b\w/g, (c) => c.toUpperCase()).trim() || "there";
+}
+
 export function LoginForm() {
+  const router = useRouter();
+  const { login } = useAuth();
+  const [next, setNext] = React.useState("/");
+
+  React.useEffect(() => {
+    const param = new URLSearchParams(window.location.search).get("next");
+    if (param) setNext(param);
+  }, []);
+
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [errors, setErrors] = React.useState<Record<string, string>>({});
@@ -32,10 +48,11 @@ export function LoginForm() {
     e.preventDefault();
     if (!validate()) return;
     setLoading(true);
-    // Backend isn't built yet — simulate the request.
+    // No backend yet — simulate a sign-in and persist a mock session.
     setTimeout(() => {
-      setLoading(false);
-      toast.info("Login isn't connected to the backend yet.");
+      login({ name: nameFromEmail(email), email });
+      toast.success("Welcome back!");
+      router.push(next);
     }, 700);
   }
 

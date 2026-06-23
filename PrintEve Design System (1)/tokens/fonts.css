@@ -1,0 +1,4 @@
+/* PrintEve typeface — Inter (the brand font used in the production app).
+   Loaded from Google Fonts. If self-hosting, replace with @font-face rules
+   pointing at local .woff2 files. */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
