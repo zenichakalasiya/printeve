@@ -1,0 +1,19 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Status hues" subtitle="Success, danger, warning, info" -->
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8" /><link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; padding: 24px; background: var(--color-background); font-family: var(--font-sans); }
+  .row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .sw { display: flex; flex-direction: column; gap: 8px; }
+  .chip { height: 64px; border-radius: var(--radius-lg); display:flex; align-items:flex-end; padding:8px; color:#fff; font-size:11px; font-weight:600; }
+  .k { font-size: 12px; font-weight: 600; color: var(--color-text); }
+  .v { font-size: 10px; color: var(--color-text-muted); font-family: var(--font-mono); }
+</style></head>
+<body>
+<div class="row">
+  <div class="sw"><div class="chip" style="background:var(--color-success)">Success</div><span class="k">Success</span><span class="v">#16A34A</span></div>
+  <div class="sw"><div class="chip" style="background:var(--color-danger)">Danger</div><span class="k">Danger</span><span class="v">#DC2626</span></div>
+  <div class="sw"><div class="chip" style="background:var(--color-warning)">Warning</div><span class="k">Warning</span><span class="v">#F59E0B</span></div>
+  <div class="sw"><div class="chip" style="background:var(--color-info)">Info</div><span class="k">Info</span><span class="v">#0EA5E9</span></div>
+</div>
+</body></html>

@@ -1,0 +1,19 @@
+<!-- @dsCard group="Brand" viewport="700x180" name="Logo" subtitle="PrintEve mark + wordmark, light & dark" -->
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8" /><link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; padding: 0; font-family: var(--font-sans); display: grid; grid-template-columns: 1fr 1fr; }
+  .panel { padding: 32px; display: flex; align-items: center; gap: 14px; min-height: 116px; }
+  .light { background: var(--color-background); }
+  .dark { background: #0A0F0C; }
+  .lockup { display: flex; align-items: center; gap: 10px; }
+  .lockup img { width: 40px; height: 40px; }
+  .word { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+  .light .word { color: var(--color-text); }
+  .dark .word { color: #ECFDF3; }
+  .cap { position: absolute; font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--color-text-subtle); margin-top: -22px; }
+</style></head>
+<body>
+<div class="panel light"><div class="lockup"><img src="../assets/logo-mark.svg" alt="PrintEve" /><span class="word">PrintEve</span></div></div>
+<div class="panel dark"><div class="lockup"><img src="../assets/logo-mark.svg" alt="PrintEve" /><span class="word">PrintEve</span></div></div>
+</body></html>

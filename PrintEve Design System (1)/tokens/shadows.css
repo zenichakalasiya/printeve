@@ -1,0 +1,18 @@
+/* ============================================================
+   PrintEve — Elevation (shadows) & focus tokens
+   Soft, low-spread shadows on a near-white UI.
+   ============================================================ */
+:root {
+  --shadow-xs:   0 1px 2px 0 rgb(15 23 42 / 0.04);
+  --shadow-card: 0 1px 2px 0 rgb(15 23 42 / 0.04), 0 1px 3px 0 rgb(15 23 42 / 0.06);
+  --shadow-card-hover: 0 8px 24px -4px rgb(15 23 42 / 0.10), 0 2px 8px -2px rgb(15 23 42 / 0.06);
+  --shadow-lg:   0 16px 40px -8px rgb(15 23 42 / 0.14), 0 4px 12px -4px rgb(15 23 42 / 0.08);
+  --shadow-popover: 0 12px 32px -6px rgb(15 23 42 / 0.16), 0 2px 6px -2px rgb(15 23 42 / 0.08);
+
+  /* Tinted brand glow — used sparingly on primary CTAs */
+  --shadow-brand: 0 8px 24px -6px rgb(22 163 74 / 0.35);
+
+  /* Focus ring */
+  --ring-width: 2px;
+  --ring-offset: 2px;
+}

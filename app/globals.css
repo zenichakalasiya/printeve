@@ -1,0 +1,35 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Design system tokens (shadcn) live in their own file, per project setup. */
+@import "../styles/design-system.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Page-transition loader — indeterminate progress bar */
+@keyframes pe-loading-bar {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(320%);
+  }
+}
+.pe-loading-bar {
+  animation: pe-loading-bar 1s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pe-loading-bar {
+    animation: none;
+  }
+}

@@ -1,0 +1,174 @@
+/* ============================================================================
+ * PrintEve — Design System  ·  Green brand identity
+ * ----------------------------------------------------------------------------
+ * Implements the official PrintEve design system: green-forward (primary
+ * #16A34A) on a clean near-white canvas, slate neutrals, Inter throughout,
+ * soft generous radii and low cool-grey shadows.
+ *
+ * Single source of truth for shadcn/ui tokens. globals.css imports this file.
+ * Raw brand scales live here; semantic tokens map to shadcn names; @theme
+ * exposes them to Tailwind utilities (incl. fonts + the `brand` accent).
+ * ==========================================================================*/
+
+:root {
+  /* Soft, rounded brand — 12px cards, 8px buttons, 16px feature cards. */
+  --radius: 0.75rem;
+
+  /* Surfaces & text (slate neutrals on white) */
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+
+  /* Brand green primary */
+  --primary: #16a34a;
+  --primary-foreground: #ffffff;
+
+  /* Neutral secondary / muted (slate-100) */
+  --secondary: #f1f5f9;
+  --secondary-foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+
+  /* Soft green accent surface (hover tints, chips) */
+  --accent: #dcfce7;
+  --accent-foreground: #166534;
+
+  --destructive: #dc2626;
+
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #16a34a;
+
+  /* Editorial-style "brand" accent — now the brand green */
+  --brand: #16a34a;
+  --brand-foreground: #ffffff;
+
+  /* Charts / decorative (greens + amber stars + info blue) */
+  --chart-1: #16a34a;
+  --chart-2: #0ea5e9;
+  --chart-3: #22c55e;
+  --chart-4: #f59e0b;
+  --chart-5: #166534;
+
+  --sidebar: #f8fafc;
+  --sidebar-foreground: #0f172a;
+  --sidebar-primary: #16a34a;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #dcfce7;
+  --sidebar-accent-foreground: #166534;
+  --sidebar-border: #e2e8f0;
+  --sidebar-ring: #16a34a;
+
+  /* Signature brand washes + CTA glow */
+  --gradient-hero: radial-gradient(
+      60% 80% at 80% 0%,
+      #dcfce7 0%,
+      transparent 60%
+    ),
+    linear-gradient(180deg, #f0fdf4 0%, #ffffff 55%);
+  --gradient-brand: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+  --shadow-brand: 0 8px 24px -6px rgb(22 163 74 / 0.35);
+}
+
+.dark {
+  --background: #0a0f0c;
+  --foreground: #ecfdf3;
+  --card: #101713;
+  --card-foreground: #ecfdf3;
+  --popover: #101713;
+  --popover-foreground: #ecfdf3;
+
+  --primary: #22c55e;
+  --primary-foreground: #052e16;
+
+  --secondary: #18211b;
+  --secondary-foreground: #ecfdf3;
+  --muted: #18211b;
+  --muted-foreground: #8fa096;
+
+  --accent: rgba(34, 197, 94, 0.14);
+  --accent-foreground: #86efac;
+
+  --destructive: #ef4444;
+
+  --border: #1f2a23;
+  --input: #2c3a30;
+  --ring: #22c55e;
+
+  --brand: #22c55e;
+  --brand-foreground: #052e16;
+
+  --chart-1: #22c55e;
+  --chart-2: #0ea5e9;
+  --chart-3: #4ade80;
+  --chart-4: #f59e0b;
+  --chart-5: #86efac;
+
+  --sidebar: #101713;
+  --sidebar-foreground: #ecfdf3;
+  --sidebar-primary: #22c55e;
+  --sidebar-primary-foreground: #052e16;
+  --sidebar-accent: rgba(34, 197, 94, 0.14);
+  --sidebar-accent-foreground: #86efac;
+  --sidebar-border: #1f2a23;
+  --sidebar-ring: #22c55e;
+
+  --gradient-hero: radial-gradient(
+      60% 80% at 80% 0%,
+      rgba(34, 197, 94, 0.16) 0%,
+      transparent 60%
+    ),
+    linear-gradient(180deg, #0c130f 0%, #0a0f0c 55%);
+}
+
+/* Expose tokens to Tailwind utilities (bg-*, text-*, border-*, font-*). */
+@theme inline {
+  /* Inter throughout — `font-serif` aliases to Inter so existing headings
+     keep working under the new brand. */
+  --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", Roboto,
+    sans-serif;
+  --font-serif: var(--font-inter), system-ui, -apple-system, "Segoe UI", Roboto,
+    sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}

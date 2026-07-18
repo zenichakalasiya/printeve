@@ -1,0 +1,804 @@
+<!-- @dsCard group="PrintEve Homepage" viewport="1280x860" name="Homepage" subtitle="Full marketing homepage — sticky nav, hero, categories, partner CTA, FAQ" -->
+<!-- @startingPoint section="Screens" subtitle="PrintEve marketing homepage" viewport="1280x860" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PrintEve — Professional Printing Made Simple</title>
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; }
+  .pe-home { background: var(--color-background); color: var(--color-text); font-family: var(--font-sans); min-height: 100vh; }
+  .sec { padding-block: clamp(56px, 7vw, 88px); }
+  .sec--alt { background: var(--color-surface); border-block: 1px solid var(--color-border); }
+  .sec__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 40px; flex-wrap: wrap; }
+  .sec__eyebrow { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--color-primary); margin-bottom: 12px; }
+  .sec__title { font: var(--text-h2); letter-spacing: var(--tracking-tight); color: var(--color-text); margin: 0; max-width: 18ch; }
+  .sec__sub { margin: 12px 0 0; color: var(--color-text-muted); font-size: var(--text-lg); max-width: 54ch; line-height: var(--leading-relaxed); }
+  .sec__link { display: inline-flex; align-items: center; gap: 6px; color: var(--color-primary); font-weight: 600; font-size: var(--text-sm); text-decoration: none; white-space: nowrap; transition: gap .15s; }
+  .sec__link:hover { gap: 9px; }
+  /* Header */
+  .hd { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--color-background) 88%, transparent); backdrop-filter: saturate(140%) blur(10px); border-bottom: 1px solid transparent; transition: box-shadow .2s, border-color .2s; }
+  .hd[data-scrolled="true"] { box-shadow: var(--shadow-card); border-bottom-color: var(--color-border); }
+  .hd__top { background: var(--color-surface); border-bottom: 1px solid var(--color-border); font-size: 12px; color: var(--color-text-muted); }
+  .hd__top-inner { display: flex; align-items: center; justify-content: space-between; padding-block: 8px; }
+  .hd__top-links { display: flex; align-items: center; gap: 18px; }
+  .hd__top-link { display: inline-flex; align-items: center; gap: 5px; color: var(--color-text-muted); text-decoration: none; }
+  .hd__top-link:hover { color: var(--color-primary); }
+  @media (max-width: 860px) { .hd__top { display: none; } }
+  .hd__main { display: flex; align-items: center; gap: 18px; padding-block: 14px; }
+  .hd__logo { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; flex-shrink: 0; }
+  .hd__logo img { width: 34px; height: 34px; }
+  .hd__logo span { font-size: 19px; font-weight: 700; letter-spacing: -0.02em; color: var(--color-text); }
+  .hd__nav { display: flex; align-items: center; gap: 2px; margin-left: 10px; }
+  @media (max-width: 1080px) { .hd__nav { display: none; } }
+  .hd__navlink { display: inline-flex; align-items: center; gap: 4px; padding: 8px 12px; border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: 500; color: var(--color-text); background: none; border: 0; cursor: pointer; text-decoration: none; font-family: inherit; }
+  .hd__navlink:hover { background: var(--color-surface); color: var(--color-primary); }
+  .hd__mega-wrap { position: relative; }
+  .hd__mega { position: absolute; left: 0; top: 100%; width: 640px; background: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--radius-xl); box-shadow: var(--shadow-popover); padding: 16px; }
+  .hd__mega-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+  .hd__mega-item { display: flex; gap: 11px; padding: 10px; border-radius: var(--radius-md); text-decoration: none; }
+  .hd__mega-item:hover { background: var(--color-surface); }
+  .hd__mega-icon { width: 36px; height: 36px; flex-shrink: 0; border-radius: var(--radius-md); background: var(--color-primary-soft); padding: 5px; }
+  .hd__mega-icon img { width: 100%; height: 100%; object-fit: contain; }
+  .hd__mega-name { display: block; font-size: var(--text-sm); font-weight: 600; color: var(--color-text); }
+  .hd__mega-desc { display: block; font-size: 11px; color: var(--color-text-muted); margin-top: 2px; line-height: 1.35; }
+  .hd__mega-all { display: inline-block; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--color-border); color: var(--color-primary); font-weight: 600; font-size: var(--text-sm); text-decoration: none; width: 100%; }
+  .hd__search { position: relative; flex: 1; max-width: 380px; margin-left: auto; }
+  @media (max-width: 760px) { .hd__search:not(.hd__search--mobile) { display: none; } }
+  .hd__search input { width: 100%; height: 42px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); padding: 0 12px 0 38px; font-size: var(--text-sm); font-family: inherit; color: var(--color-text); }
+  .hd__search input:focus-visible { outline: none; border-color: var(--color-primary); background: var(--color-background); box-shadow: 0 0 0 3px var(--color-primary-soft); }
+  .hd__search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--color-text-muted); pointer-events: none; }
+  .hd__actions { display: flex; align-items: center; gap: 2px; }
+  .hd__icon-btn { width: 42px; height: 42px; display: inline-flex; align-items: center; justify-content: center; border: 0; background: none; border-radius: var(--radius-md); color: var(--color-text); cursor: pointer; position: relative; }
+  .hd__icon-btn:hover { background: var(--color-surface); color: var(--color-primary); }
+  .hd__cart-count { position: absolute; top: 4px; right: 4px; min-width: 17px; height: 17px; padding: 0 4px; border-radius: 9px; background: var(--color-primary); color: #fff; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .hd__burger { display: none; }
+  @media (max-width: 1080px) { .hd__burger { display: inline-flex; } }
+  .hd__mobile { border-top: 1px solid var(--color-border); padding: 16px 20px; display: flex; flex-direction: column; gap: 4px; background: var(--color-background); }
+  .hd__search--mobile { max-width: none; margin: 0 0 8px; display: block; }
+  .hd__mobile-cap { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--color-text-subtle); font-weight: 700; margin: 6px 0 2px; }
+  .hd__mobile-link { padding: 9px 8px; border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: 500; color: var(--color-text); text-decoration: none; }
+  .hd__mobile-link:hover { background: var(--color-surface); }
+  .hd__mobile-div { height: 1px; background: var(--color-border); margin: 8px 0; }
+  /* Hero */
+  .hero { position: relative; background: var(--gradient-hero); border-bottom: 1px solid var(--color-border); overflow: hidden; }
+  .hero__inner { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; padding-block: clamp(48px, 6vw, 84px); }
+  @media (max-width: 940px) { .hero__inner { grid-template-columns: 1fr; gap: 40px; } }
+  .hero__eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: var(--radius-full); border: 1px solid var(--color-border); background: var(--color-background); font-size: var(--text-xs); font-weight: 500; color: var(--color-text-muted); }
+  .hero__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--color-secondary); }
+  .hero__title { font-size: clamp(40px, 5.6vw, 64px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.08; color: var(--color-text); margin: 20px 0 0; }
+  .hero__title-accent { color: var(--color-primary); }
+  .hero__sub { margin: 20px 0 0; font-size: var(--text-lg); line-height: var(--leading-relaxed); color: var(--color-text-muted); max-width: 50ch; }
+  .hero__cta { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+  .hero__trust { display: flex; gap: 22px; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--color-border); flex-wrap: wrap; }
+  .hero__trust span { display: inline-flex; align-items: center; gap: 7px; font-size: var(--text-sm); font-weight: 500; color: var(--color-text); }
+  .hero__trust svg { color: var(--color-primary); }
+  .hero__art { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .hero__tile { background: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--radius-xl); box-shadow: var(--shadow-card); padding: 18px; display: flex; flex-direction: column; aspect-ratio: 3/4; }
+  .hero__tile--up { margin-top: 32px; } .hero__tile--down { margin-top: -32px; }
+  @media (max-width: 940px) { .hero__tile--up, .hero__tile--down { margin-top: 0; } }
+  .hero__tile-img { flex: 1; display: flex; align-items: center; justify-content: center; padding-bottom: 12px; }
+  .hero__tile-img img { width: 78%; height: 78%; object-fit: contain; }
+  .hero__tile-name { font-size: var(--text-sm); font-weight: 600; color: var(--color-text); margin: 0; }
+  .hero__tile-note { font-size: 11px; color: var(--color-text-muted); margin: 3px 0 0; }
+  .hero__float { position: absolute; display: inline-flex; align-items: center; gap: 6px; padding: 8px 13px; border-radius: var(--radius-full); background: var(--color-background); box-shadow: var(--shadow-lg); font-size: var(--text-xs); font-weight: 600; color: var(--color-text); border: 1px solid var(--color-border); }
+  .hero__float svg { color: var(--color-primary); }
+  .hero__float--1 { top: -10px; left: -18px; } .hero__float--2 { bottom: 14px; right: -14px; }
+  @media (max-width: 940px) { .hero__float { display: none; } }
+  .hero__badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 28px; padding-bottom: 36px; }
+  .hero__badges span { font-size: 11px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--color-text-subtle); }
+  /* Stats */
+  .sec--stats { padding-block: clamp(40px, 4vw, 56px); }
+  .stats__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  @media (max-width: 760px) { .stats__grid { grid-template-columns: repeat(2, 1fr); } }
+  /* Categories */
+  .cat__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 860px) { .cat__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .cat__grid { grid-template-columns: 1fr; } }
+  /* How it works */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+  @media (max-width: 900px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .steps { grid-template-columns: 1fr; } }
+  .step__top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .step__icon { width: 48px; height: 48px; border-radius: var(--radius-lg); background: var(--color-primary); color: #fff; display: inline-flex; align-items: center; justify-content: center; box-shadow: var(--shadow-brand); }
+  .step__num { font-size: 30px; font-weight: 800; color: color-mix(in srgb, var(--color-primary) 22%, transparent); letter-spacing: -0.02em; }
+  .step__title { font-size: var(--text-lg); font-weight: 600; color: var(--color-text); margin: 0 0 6px; }
+  .step__desc { font-size: var(--text-sm); color: var(--color-text-muted); margin: 0; line-height: var(--leading-relaxed); }
+  /* Why */
+  .why__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 860px) { .why__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .why__grid { grid-template-columns: 1fr; } }
+  .why__card { background: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: 26px; transition: transform .2s, box-shadow .2s, border-color .2s; }
+  .why__card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card-hover); border-color: color-mix(in srgb, var(--color-primary) 30%, var(--color-border)); }
+  .why__icon { width: 48px; height: 48px; border-radius: var(--radius-lg); background: var(--color-primary-soft); color: var(--color-primary-soft-fg); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+  .why__title { font-size: var(--text-lg); font-weight: 600; color: var(--color-text); margin: 0 0 8px; }
+  .why__desc { font-size: var(--text-sm); color: var(--color-text-muted); margin: 0; line-height: var(--leading-relaxed); }
+  /* Products */
+  .prod__scroll { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(260px, 1fr); gap: 18px; overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x mandatory; }
+  @media (min-width: 1024px) { .prod__scroll { grid-template-columns: repeat(4, 1fr); grid-auto-flow: row; overflow: visible; } }
+  .prod__item { scroll-snap-align: start; }
+  /* Partner */
+  .partner { display: grid; grid-template-columns: 1.1fr 1fr; border-radius: var(--radius-2xl); overflow: hidden; box-shadow: var(--shadow-lg); }
+  @media (max-width: 900px) { .partner { grid-template-columns: 1fr; } }
+  .partner__copy { background: var(--gradient-brand); padding: clamp(32px, 4vw, 52px); color: #fff; }
+  .partner__title { font: var(--text-h2); color: #fff; margin: 14px 0 0; letter-spacing: var(--tracking-tight); }
+  .partner__sub { color: var(--green-100); margin: 14px 0 0; line-height: var(--leading-relaxed); max-width: 46ch; }
+  .partner__benefits { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 28px 0 32px; }
+  @media (max-width: 520px) { .partner__benefits { grid-template-columns: 1fr; } }
+  .partner__benefit { display: flex; gap: 11px; }
+  .partner__benefit-icon { width: 38px; height: 38px; flex-shrink: 0; border-radius: var(--radius-md); background: rgba(255,255,255,.16); color: #fff; display: inline-flex; align-items: center; justify-content: center; }
+  .partner__benefit-title { font-size: var(--text-sm); font-weight: 600; color: #fff; margin: 0; }
+  .partner__benefit-desc { font-size: 12px; color: var(--green-100); margin: 3px 0 0; line-height: 1.45; }
+  .partner__panel { background: var(--color-background); padding: clamp(28px, 3vw, 44px); display: flex; flex-direction: column; justify-content: center; gap: 22px; }
+  .partner__stat-v { font-size: 44px; font-weight: 800; color: var(--color-primary); letter-spacing: -0.02em; line-height: 1; }
+  .partner__stat-l { font-size: var(--text-sm); color: var(--color-text-muted); }
+  .partner__rows { display: flex; flex-direction: column; gap: 2px; }
+  .partner__row { display: flex; align-items: center; justify-content: space-between; padding: 13px 0; border-top: 1px solid var(--color-border); }
+  .partner__row span { display: inline-flex; align-items: center; gap: 9px; font-size: var(--text-sm); color: var(--color-text-muted); }
+  .partner__row svg { color: var(--color-primary); }
+  .partner__row strong { font-size: var(--text-base); font-weight: 700; color: var(--color-text); }
+  /* Testimonials */
+  .marq { overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent); mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent); }
+  .marq__track { display: flex; gap: 18px; width: max-content; animation: pe-marquee 48s linear infinite; }
+  .marq:hover .marq__track { animation-play-state: paused; }
+  @media (prefers-reduced-motion: reduce) { .marq__track { animation: none; } }
+  .tmt { width: 340px; flex-shrink: 0; background: var(--color-background); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: 26px; box-shadow: var(--shadow-card); position: relative; }
+  .tmt__quote { position: absolute; top: 22px; right: 22px; color: var(--color-primary-soft); }
+  .tmt__stars { display: flex; gap: 1px; color: var(--color-secondary); margin-bottom: 14px; }
+  .tmt__text { font-size: var(--text-sm); line-height: var(--leading-relaxed); color: var(--color-text); margin: 0 0 18px; }
+  .tmt__by { display: flex; align-items: center; gap: 11px; border-top: 1px solid var(--color-border); padding-top: 16px; }
+  .tmt__avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-soft); color: var(--color-primary-soft-fg); font-size: var(--text-sm); font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
+  .tmt__name { display: block; font-size: var(--text-sm); font-weight: 600; color: var(--color-text); }
+  .tmt__role { display: block; font-size: 12px; color: var(--color-text-muted); }
+  /* FAQ */
+  .faq { max-width: 760px; }
+  .faq__head { text-align: center; margin-bottom: 36px; }
+  .faq__head .sec__sub { margin-inline: auto; }
+  /* Final CTA */
+  .finalcta { background: var(--gradient-brand); border-radius: var(--radius-2xl); padding: clamp(44px, 6vw, 72px); text-align: center; box-shadow: var(--shadow-lg); position: relative; overflow: hidden; }
+  .finalcta::after { content: ""; position: absolute; inset: 0; background: radial-gradient(50% 100% at 50% 0%, rgba(255,255,255,.18), transparent 60%); pointer-events: none; }
+  .finalcta__title { font: var(--text-h2); font-size: clamp(28px, 4vw, 42px); color: #fff; margin: 0; letter-spacing: var(--tracking-tight); position: relative; }
+  .finalcta__sub { color: var(--green-100); margin: 14px auto 0; max-width: 50ch; font-size: var(--text-lg); line-height: var(--leading-relaxed); position: relative; }
+  .finalcta__btns { display: flex; gap: 12px; justify-content: center; margin-top: 30px; flex-wrap: wrap; position: relative; }
+  .finalcta__btn-light.pe-btn { background: #fff; color: var(--color-primary-hover); border-color: #fff; }
+  .finalcta__btn-light.pe-btn:hover { background: var(--green-50); box-shadow: var(--shadow-lg); }
+  .finalcta__btn-ghost.pe-btn { color: #fff; border: 1px solid rgba(255,255,255,.4); }
+  .finalcta__btn-ghost.pe-btn:hover { background: rgba(255,255,255,.12); }
+  /* Footer */
+  .ft { background: var(--color-surface); border-top: 1px solid var(--color-border); }
+  .ft__grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.4fr; gap: 36px; padding-block: 56px; }
+  @media (max-width: 980px) { .ft__grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .ft__grid { grid-template-columns: 1fr; } }
+  .ft__about { margin: 16px 0; font-size: var(--text-sm); color: var(--color-text-muted); line-height: var(--leading-relaxed); max-width: 38ch; }
+  .ft__contact { display: flex; flex-direction: column; gap: 9px; }
+  .ft__contact span { display: inline-flex; align-items: center; gap: 9px; font-size: var(--text-sm); color: var(--color-text-muted); }
+  .ft__contact svg { color: var(--color-primary); flex-shrink: 0; }
+  .ft__social { display: flex; gap: 9px; margin-top: 18px; }
+  .ft__social a { width: 38px; height: 38px; border-radius: var(--radius-md); border: 1px solid var(--color-border); color: var(--color-text-muted); display: inline-flex; align-items: center; justify-content: center; }
+  .ft__social a:hover { border-color: var(--color-primary); color: var(--color-primary); }
+  .ft__col h3, .ft__news h3 { font-size: var(--text-sm); font-weight: 600; color: var(--color-text); margin: 0 0 16px; }
+  .ft__col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 11px; }
+  .ft__col a { font-size: var(--text-sm); color: var(--color-text-muted); text-decoration: none; }
+  .ft__col a:hover { color: var(--color-primary); }
+  .ft__news p { font-size: var(--text-sm); color: var(--color-text-muted); margin: 0 0 14px; line-height: 1.5; }
+  .ft__news-form { display: flex; gap: 8px; }
+  .ft__news-form input { flex: 1; height: 42px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-background); padding: 0 12px; font-size: var(--text-sm); font-family: inherit; color: var(--color-text); min-width: 0; }
+  .ft__news-form input:focus-visible { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px var(--color-primary-soft); }
+  .ft__news-form button { width: 42px; height: 42px; flex-shrink: 0; border: 0; border-radius: var(--radius-md); background: var(--color-primary); color: #fff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+  .ft__news-form button:hover { background: var(--color-primary-hover); }
+  .ft__bottom { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 22px; border-top: 1px solid var(--color-border); flex-wrap: wrap; }
+  .ft__bottom p { font-size: 12px; color: var(--color-text-muted); margin: 0; }
+  .ft__legal { display: flex; gap: 20px; }
+  .ft__legal a { font-size: 12px; color: var(--color-text-muted); text-decoration: none; }
+  .ft__legal a:hover { color: var(--color-primary); }
+  /* Drawer */
+  .drawer__scrim { position: fixed; inset: 0; background: rgba(15,23,42,.4); opacity: 0; pointer-events: none; transition: opacity .25s; z-index: 60; }
+  .drawer__scrim.is-open { opacity: 1; pointer-events: auto; }
+  .drawer { position: fixed; top: 0; right: 0; bottom: 0; width: 400px; max-width: 90vw; background: var(--color-background); box-shadow: var(--shadow-lg); transform: translateX(100%); transition: transform .28s cubic-bezier(.4,0,.2,1); z-index: 61; display: flex; flex-direction: column; }
+  .drawer.is-open { transform: translateX(0); }
+  .drawer__head { display: flex; align-items: center; justify-content: space-between; padding: 20px 22px; border-bottom: 1px solid var(--color-border); }
+  .drawer__head h3 { margin: 0; font-size: var(--text-lg); font-weight: 700; }
+  .drawer__head h3 span { color: var(--color-text-muted); font-weight: 500; }
+  .drawer__body { flex: 1; overflow-y: auto; padding: 16px 22px; display: flex; flex-direction: column; gap: 14px; }
+  .drawer__empty { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; height: 100%; color: var(--color-text-subtle); }
+  .drawer__item { display: flex; gap: 13px; align-items: center; }
+  .drawer__item-img { width: 56px; height: 56px; flex-shrink: 0; border-radius: var(--radius-md); background: var(--color-surface); border: 1px solid var(--color-border); padding: 8px; }
+  .drawer__item-img img { width: 100%; height: 100%; object-fit: contain; }
+  .drawer__item-name { font-size: var(--text-sm); font-weight: 600; color: var(--color-text); margin: 0; }
+  .drawer__item-meta { font-size: 12px; color: var(--color-text-muted); margin: 3px 0 0; }
+  .drawer__item-price { font-size: var(--text-sm); font-weight: 700; }
+  .drawer__foot { padding: 20px 22px; border-top: 1px solid var(--color-border); display: flex; flex-direction: column; gap: 14px; }
+  .drawer__total { display: flex; align-items: center; justify-content: space-between; }
+  .drawer__total span { color: var(--color-text-muted); font-size: var(--text-sm); }
+  .drawer__total strong { font-size: var(--text-xl); font-weight: 800; }
+  /* Modal */
+  .modal__scrim { position: fixed; inset: 0; background: rgba(15,23,42,.5); display: flex; align-items: center; justify-content: center; padding: 20px; z-index: 70; }
+  .modal { position: relative; width: 100%; max-width: 420px; background: var(--color-background); border-radius: var(--radius-2xl); box-shadow: var(--shadow-lg); padding: 34px; }
+  .modal__close { position: absolute; top: 14px; right: 14px; }
+  .modal__brand { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 18px; }
+  .modal__brand img { width: 32px; height: 32px; }
+  .modal__brand span { font-size: 18px; font-weight: 700; color: var(--color-text); }
+  .modal__title { font-size: var(--text-2xl); font-weight: 700; color: var(--color-text); margin: 0; letter-spacing: var(--tracking-tight); }
+  .modal__sub { font-size: var(--text-sm); color: var(--color-text-muted); margin: 8px 0 22px; line-height: 1.5; }
+  .modal__form { display: flex; flex-direction: column; gap: 16px; }
+  .modal__switch { text-align: center; font-size: var(--text-sm); color: var(--color-text-muted); margin: 18px 0 0; }
+  .modal__switch button { background: none; border: 0; color: var(--color-primary); font-weight: 600; cursor: pointer; font-family: inherit; font-size: inherit; }
+  /* Toast */
+  .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: var(--radius-full); background: var(--color-text); color: var(--color-background); font-size: var(--text-sm); font-weight: 600; box-shadow: var(--shadow-lg); z-index: 80; animation: toast-in .3s ease; }
+  .toast svg { color: var(--color-secondary); }
+  @keyframes toast-in { from { opacity: 0; transform: translate(-50%, 12px); } to { opacity: 1; transform: translate(-50%, 0); } }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<script type="text/babel">
+const { Button, Badge, Input, Accordion, StatCard, CategoryCard, ProductCard } = window.PrintEveDesignSystem_a6adda;
+
+/* ── Icons ── */
+const I = ({ children, size = 20, ...p }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor"
+       strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>{children}</svg>
+);
+const Printer = (p) => <I {...p}><path d="M6 9V2h12v7" /><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /><rect x="6" y="14" width="12" height="8" rx="1" /></I>;
+const Search = (p) => <I {...p}><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></I>;
+const Cart = (p) => <I {...p}><circle cx="8" cy="21" r="1" /><circle cx="19" cy="21" r="1" /><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" /></I>;
+const User = (p) => <I {...p}><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></I>;
+const Menu = (p) => <I {...p}><path d="M4 6h16M4 12h16M4 18h16" /></I>;
+const X = (p) => <I {...p}><path d="M18 6 6 18M6 6l12 12" /></I>;
+const ArrowRight = (p) => <I {...p}><path d="M5 12h14M12 5l7 7-7 7" /></I>;
+const ChevDown = (p) => <I {...p}><path d="m6 9 6 6 6-6" /></I>;
+const Shield = (p) => <I {...p}><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></I>;
+const Truck = (p) => <I {...p}><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" /><path d="M15 18H9" /><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14" /><circle cx="17" cy="18" r="2" /><circle cx="7" cy="18" r="2" /></I>;
+const Clock = (p) => <I {...p}><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></I>;
+const StarFill = ({ size = 16, ...p }) => <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor" {...p}><path d="M12 2.5l2.9 5.88 6.49.94-4.7 4.58 1.11 6.46L12 17.9l-5.8 3.05 1.11-6.46-4.7-4.58 6.49-.94L12 2.5z" /></svg>;
+const MapPin = (p) => <I {...p}><path d="M20 10c0 4.4-8 12-8 12s-8-7.6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></I>;
+const Phone = (p) => <I {...p}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" /></I>;
+const Mail = (p) => <I {...p}><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></I>;
+const Check = (p) => <I {...p}><path d="M20 6 9 17l-5-5" /></I>;
+const Sun = (p) => <I {...p}><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" /></I>;
+const Moon = (p) => <I {...p}><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></I>;
+const Zap = (p) => <I {...p}><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" /></I>;
+const Award = (p) => <I {...p}><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526" /><circle cx="12" cy="8" r="6" /></I>;
+const Headset = (p) => <I {...p}><path d="M3 11h3a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" /><path d="M18 11h3v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1z" /><path d="M3 11a9 9 0 0 1 18 0" /><path d="M21 16v2a4 4 0 0 1-4 4h-5" /></I>;
+const CreditCard = (p) => <I {...p}><rect x="2" y="5" width="20" height="14" rx="2" /><path d="M2 10h20" /></I>;
+const BadgeCheck = (p) => <I {...p}><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" /><path d="m9 12 2 2 4-4" /></I>;
+const Dashboard = (p) => <I {...p}><rect x="3" y="3" width="7" height="9" rx="1" /><rect x="14" y="3" width="7" height="5" rx="1" /><rect x="14" y="12" width="7" height="9" rx="1" /><rect x="3" y="16" width="7" height="5" rx="1" /></I>;
+const Users = (p) => <I {...p}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" /></I>;
+const TrendingUp = (p) => <I {...p}><path d="M16 7h6v6" /><path d="m22 7-8.5 8.5-5-5L2 17" /></I>;
+const Upload = (p) => <I {...p}><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="M17 8l-5-5-5 5" /><path d="M12 3v12" /></I>;
+const Quote = (p) => <I {...p}><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2.5l-1 4h2l2-6V5a2 2 0 0 0-2-2zM6 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2.5l-1 4h2l2-6V5a2 2 0 0 0-2-2z" /></I>;
+
+const iconMap = { TrendingUp, Users, BadgeCheck, Clock, Upload, Printer, ShieldCheck: Shield, Truck, Zap, Award, CreditCard, Headset, LayoutDashboard: Dashboard };
+
+/* ── Data ── */
+const DATA = {
+  cats: [
+    { slug: "business-cards", name: "Business Cards", desc: "Premium finishes that make a strong first impression" },
+    { slug: "flyers", name: "Flyers", desc: "Eye-catching flyers for promotions and events" },
+    { slug: "brochures", name: "Brochures", desc: "Multi-fold brochures that tell your story" },
+    { slug: "posters", name: "Posters", desc: "Large-format posters with vibrant, sharp print" },
+    { slug: "banners", name: "Banners", desc: "Durable indoor and outdoor banners" },
+    { slug: "stickers", name: "Stickers", desc: "Custom-shaped stickers and labels" },
+    { slug: "packaging", name: "Packaging", desc: "Branded boxes, mailers and packaging inserts" },
+    { slug: "marketing-materials", name: "Marketing Materials", desc: "Catalogues, letterheads and promotional kits" },
+    { slug: "bulk-printing", name: "Bulk Printing", desc: "High-volume orders with volume discounts" },
+  ],
+  stats: [
+    { value: "10,000+", label: "Orders delivered", icon: "TrendingUp" },
+    { value: "500+", label: "Printing partners", icon: "Users" },
+    { value: "99%", label: "Customer satisfaction", icon: "BadgeCheck" },
+    { value: "24 hrs", label: "Avg. response time", icon: "Clock" },
+  ],
+  products: [
+    { slug: "business-cards", name: "Premium Business Cards", price: "₹499", rating: 4.9, reviews: 1240, badge: "Bestseller", img: "business-cards" },
+    { slug: "flyers", name: "Promotional Flyers", price: "₹899", rating: 4.7, reviews: 612, img: "flyers" },
+    { slug: "posters", name: "Large-Format Posters", price: "₹349", rating: 4.8, reviews: 318, badge: "Popular", img: "posters" },
+    { slug: "packaging", name: "Custom Packaging Boxes", price: "₹1,299", rating: 4.9, reviews: 204, img: "packaging" },
+  ],
+  steps: [
+    { step: "01", title: "Choose & Customize", desc: "Pick a product, select paper, size and finish, and upload your artwork — or use our design templates.", icon: "Upload" },
+    { step: "02", title: "We Print With Precision", desc: "Your order is routed to a quality-checked print partner and produced on professional-grade equipment.", icon: "Printer" },
+    { step: "03", title: "Quality Checked", desc: "Every order passes inspection for colour accuracy, finishing and material before it ships.", icon: "ShieldCheck" },
+    { step: "04", title: "Fast, Tracked Delivery", desc: "Your prints are packed securely and delivered on schedule, with live order tracking the whole way.", icon: "Truck" },
+  ],
+  why: [
+    { title: "Instant Quotes", desc: "Transparent, real-time pricing the moment you configure your product.", icon: "Zap" },
+    { title: "Premium Print Quality", desc: "High-resolution offset and digital printing on professional-grade stocks.", icon: "Award" },
+    { title: "Fast Turnaround", desc: "Production timelines you can count on, with proactive updates.", icon: "Clock" },
+    { title: "Secure Payments", desc: "PCI-compliant checkout with UPI, cards and net-banking support.", icon: "CreditCard" },
+    { title: "Verified Print Partners", desc: "Every partner is vetted and quality-audited before joining.", icon: "BadgeCheck" },
+    { title: "Dedicated Support", desc: "Real people ready to help with artwork, specs and order issues.", icon: "Headset" },
+  ],
+  partnerBenefits: [
+    { title: "More Orders", desc: "Tap into a steady stream of local and national print demand.", icon: "TrendingUp" },
+    { title: "Easy Dashboard", desc: "Track jobs, manage capacity and update statuses in one place.", icon: "LayoutDashboard" },
+    { title: "Secure Payments", desc: "On-time, automated payouts with full transaction visibility.", icon: "CreditCard" },
+    { title: "Customer Reach", desc: "Get discovered by thousands of businesses across India.", icon: "Users" },
+  ],
+  testimonials: [
+    { name: "Aditi Sharma", role: "Founder, Studio Loom", quote: "The print quality on our business cards is outstanding — the colours match our brand exactly, and delivery was ahead of schedule." },
+    { name: "Rohan Mehta", role: "Marketing Lead, Northbound Foods", quote: "We order flyers and posters for every campaign launch. Consistent quality, easy reordering, and great pricing for bulk runs." },
+    { name: "Priya Nair", role: "Operations Manager, Verde Living", quote: "Their packaging prints elevated our product presentation. The team was responsive when we needed a last-minute revision." },
+    { name: "Karan Malhotra", role: "Event Producer, Spotlight Co.", quote: "Banners arrived on time for a tight event deadline, vibrant and exactly to spec. Our go-to printing partner now." },
+    { name: "Simran Kaur", role: "Brand Manager, Petal & Co.", quote: "From stickers to brochures, every order has been precise and on-brand. The online ordering experience is genuinely easy." },
+  ],
+  faqs: [
+    { question: "What file formats do you accept?", answer: "We accept PDF, AI, EPS, PSD, PNG and JPG. For best results, submit print-ready PDFs at 300 DPI with a 3mm bleed." },
+    { question: "How long does printing and delivery take?", answer: "Standard orders are produced within 24–72 hours depending on the product and quantity." },
+    { question: "Can I order custom sizes or quantities?", answer: "Yes. Most products offer a range of standard sizes and quantity tiers. Contact us for a tailored quote on larger requirements." },
+    { question: "Do you offer bulk pricing discounts?", answer: "Yes — pricing automatically adjusts based on quantity slab, with better per-unit rates at higher volumes." },
+    { question: "What if I'm not happy with the print quality?", answer: "Contact support within 7 days of delivery for a reprint or refund if there's a manufacturing defect." },
+    { question: "Can I track my order?", answer: "Yes, every order includes a real-time tracking page from order confirmation through delivery." },
+  ],
+  trustBadges: ["ISO 9001 Certified", "10,000+ Businesses Served", "48-Hour Turnaround", "Pan-India Delivery", "Secure Checkout", "Quality Guaranteed"],
+};
+
+/* ── Section scaffold ── */
+function SectionHead({ eyebrow, title, sub, action }) {
+  return (
+    <div className="sec__head">
+      <div>
+        {eyebrow && <span className="sec__eyebrow">{eyebrow}</span>}
+        <h2 className="sec__title">{title}</h2>
+        {sub && <p className="sec__sub">{sub}</p>}
+      </div>
+      {action}
+    </div>
+  );
+}
+
+/* ── Header ── */
+function SiteHeader({ cartCount, onCartClick, dark, onToggleDark, onOpenAuth }) {
+  const [scrolled, setScrolled] = React.useState(false);
+  const [mega, setMega] = React.useState(false);
+  const [mobile, setMobile] = React.useState(false);
+  React.useEffect(() => {
+    const fn = () => setScrolled(window.scrollY > 8);
+    fn(); window.addEventListener("scroll", fn, { passive: true });
+    return () => window.removeEventListener("scroll", fn);
+  }, []);
+  const nav = [["Track Order", "#"], ["Partners", "#partner"], ["About", "#"], ["Contact", "#"]];
+  return (
+    <header className="hd" data-scrolled={scrolled}>
+      <div className="hd__top"><div className="pe-container hd__top-inner">
+        <p>Free design proofing on every order · Pan-India delivery</p>
+        <div className="hd__top-links">
+          <span className="hd__top-link"><MapPin size={14} /> Bengaluru</span>
+          <a href="#" className="hd__top-link">+91 12345 67890</a>
+          <a href="#" className="hd__top-link">Track Order</a>
+        </div>
+      </div></div>
+      <div className="pe-container hd__main">
+        <a href="#" className="hd__logo"><img src="../../assets/logo-mark.svg" alt="" /><span>PrintEve</span></a>
+        <nav className="hd__nav">
+          <div className="hd__mega-wrap" onMouseEnter={() => setMega(true)} onMouseLeave={() => setMega(false)}>
+            <button className="hd__navlink" aria-expanded={mega}>Products <ChevDown size={16} /></button>
+            {mega && (
+              <div className="hd__mega">
+                <div className="hd__mega-grid">
+                  {DATA.cats.map((c) => (
+                    <a key={c.slug} href="#categories" className="hd__mega-item">
+                      <span className="hd__mega-icon"><img src={`../../assets/illustrations/${c.slug}.svg`} alt="" /></span>
+                      <span><span className="hd__mega-name">{c.name}</span><span className="hd__mega-desc">{c.desc}</span></span>
+                    </a>
+                  ))}
+                </div>
+                <a href="#categories" className="hd__mega-all">View all products →</a>
+              </div>
+            )}
+          </div>
+          {nav.map(([label, href]) => <a key={label} href={href} className="hd__navlink">{label}</a>)}
+        </nav>
+        <form className="hd__search" onSubmit={(e) => e.preventDefault()}>
+          <Search size={16} className="hd__search-icon" />
+          <input type="search" placeholder="Search products…" aria-label="Search products" />
+        </form>
+        <div className="hd__actions">
+          <button className="hd__icon-btn" onClick={onToggleDark} aria-label="Toggle theme">{dark ? <Sun /> : <Moon />}</button>
+          <button className="hd__icon-btn" onClick={onOpenAuth} aria-label="Sign in"><User /></button>
+          <button className="hd__icon-btn" onClick={onCartClick} aria-label="Cart" style={{ position: "relative" }}>
+            <Cart />
+            {cartCount > 0 && <span className="hd__cart-count">{cartCount}</span>}
+          </button>
+          <button className="hd__icon-btn hd__burger" onClick={() => setMobile(v => !v)} aria-label="Menu">{mobile ? <X /> : <Menu />}</button>
+        </div>
+      </div>
+      {mobile && (
+        <div className="hd__mobile">
+          <form className="hd__search hd__search--mobile" onSubmit={(e) => e.preventDefault()}>
+            <Search size={16} className="hd__search-icon" />
+            <input type="search" placeholder="Search products…" />
+          </form>
+          <p className="hd__mobile-cap">Categories</p>
+          {DATA.cats.slice(0, 6).map((c) => <a key={c.slug} href="#categories" className="hd__mobile-link" onClick={() => setMobile(false)}>{c.name}</a>)}
+          <div className="hd__mobile-div" />
+          {nav.map(([l, h]) => <a key={l} href={h} className="hd__mobile-link" onClick={() => setMobile(false)}>{l}</a>)}
+        </div>
+      )}
+    </header>
+  );
+}
+
+/* ── Hero ── */
+function Hero({ onAddToCart }) {
+  const tiles = [
+    { img: "business-cards", name: "Business Cards", note: "Premium matte & foil finishes", cls: "" },
+    { img: "marketing-materials", name: "Marketing Kits", note: "Flyers, brochures & posters", cls: "hero__tile--up" },
+    { img: "packaging", name: "Packaging", note: "Branded boxes & mailers", cls: "hero__tile--down" },
+    { img: "banners", name: "Banners", note: "Indoor & outdoor durable print", cls: "" },
+  ];
+  return (
+    <section className="hero">
+      <div className="pe-container hero__inner">
+        <div className="hero__copy">
+          <span className="hero__eyebrow"><span className="hero__dot" /> Trusted by 10,000+ businesses across India</span>
+          <h1 className="hero__title">Professional printing<br /><span className="hero__title-accent">made simple</span></h1>
+          <p className="hero__sub">Get instant quotes from trusted printing partners and order custom print products online — with transparent pricing and quality you can rely on.</p>
+          <div className="hero__cta">
+            <Button size="lg" rightIcon={<ArrowRight size={16} />} onClick={onAddToCart}>Start Printing</Button>
+            <Button size="lg" variant="outline" as="a" href="#categories">Browse Products</Button>
+          </div>
+          <div className="hero__trust">
+            <span><Shield size={16} /> Quality guaranteed</span>
+            <span><Clock size={16} /> From 24 hrs</span>
+            <span><Truck size={16} /> Pan-India delivery</span>
+          </div>
+        </div>
+        <div className="hero__art">
+          {tiles.map((t) => (
+            <div key={t.name} className={`hero__tile ${t.cls}`}>
+              <div className="hero__tile-img"><img src={`../../assets/illustrations/${t.img}.svg`} alt="" /></div>
+              <div><p className="hero__tile-name">{t.name}</p><p className="hero__tile-note">{t.note}</p></div>
+            </div>
+          ))}
+          <div className="hero__float hero__float--1"><Zap size={15} /> Instant quote</div>
+          <div className="hero__float hero__float--2"><BadgeCheck size={15} /> 500+ partners</div>
+        </div>
+      </div>
+      <div className="pe-container"><div className="hero__badges">{DATA.trustBadges.map((b) => <span key={b}>{b}</span>)}</div></div>
+    </section>
+  );
+}
+
+/* ── Stats ── */
+function Stats() {
+  return (
+    <section className="sec sec--stats pe-container">
+      <div className="stats__grid">
+        {DATA.stats.map((s) => { const Ic = iconMap[s.icon]; return <StatCard key={s.label} value={s.value} label={s.label} icon={<Ic size={20} />} />; })}
+      </div>
+    </section>
+  );
+}
+
+/* ── Categories ── */
+function Categories() {
+  return (
+    <section id="categories" className="sec pe-container">
+      <SectionHead eyebrow="Shop by category" title="Everything your brand needs in print"
+        sub="From a single box of cards to a full marketing run — printed to spec and delivered fast."
+        action={<a className="sec__link" href="#">View all products <ArrowRight size={16} /></a>} />
+      <div className="cat__grid">
+        {DATA.cats.map((c) => <CategoryCard key={c.slug} name={c.name} description={c.desc} iconSrc={`../../assets/illustrations/${c.slug}.svg`} href="#" />)}
+      </div>
+    </section>
+  );
+}
+
+/* ── How it works ── */
+function HowItWorks() {
+  return (
+    <section className="sec sec--alt">
+      <div className="pe-container">
+        <SectionHead eyebrow="How PrintEve works" title="From upload to delivery in four steps"
+          sub="A simple, transparent process designed to get your prints right the first time." />
+        <div className="steps">
+          {DATA.steps.map((s) => { const Ic = iconMap[s.icon]; return (
+            <div key={s.step}>
+              <div className="step__top"><span className="step__icon">{Ic && <Ic size={20} />}</span><span className="step__num">{s.step}</span></div>
+              <h3 className="step__title">{s.title}</h3>
+              <p className="step__desc">{s.desc}</p>
+            </div>
+          ); })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Why choose us ── */
+function WhyChooseUs() {
+  return (
+    <section className="sec pe-container">
+      <SectionHead eyebrow="Why PrintEve" title="Built for businesses that print at scale"
+        sub="Professional-grade production meets a streamlined online ordering experience." />
+      <div className="why__grid">
+        {DATA.why.map((f) => { const Ic = iconMap[f.icon]; return (
+          <div key={f.title} className="why__card">
+            <span className="why__icon">{Ic && <Ic size={22} />}</span>
+            <h3 className="why__title">{f.title}</h3>
+            <p className="why__desc">{f.desc}</p>
+          </div>
+        ); })}
+      </div>
+    </section>
+  );
+}
+
+/* ── Featured products ── */
+function FeaturedProducts({ onAddToCart }) {
+  return (
+    <section className="sec sec--alt">
+      <div className="pe-container">
+        <SectionHead eyebrow="Featured products" title="Our most-ordered print products"
+          sub="Ready to customise and order — with starting prices and live ratings."
+          action={<a className="sec__link" href="#">View all <ArrowRight size={16} /></a>} />
+        <div className="prod__scroll">
+          {DATA.products.map((p) => (
+            <div key={p.slug} className="prod__item">
+              <ProductCard name={p.name} price={p.price} rating={p.rating} reviews={p.reviews}
+                badge={p.badge} imageSrc={`../../assets/illustrations/${p.img}.svg`}
+                onClick={(e) => { e.preventDefault(); onAddToCart(); }} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Partner section ── */
+function PartnerSection() {
+  return (
+    <section id="partner" className="sec pe-container">
+      <div className="partner">
+        <div className="partner__copy">
+          <span className="sec__eyebrow" style={{ color: "var(--green-200)" }}>For printing partners</span>
+          <h2 className="partner__title">Grow your printing business with PrintEve</h2>
+          <p className="partner__sub">Join 500+ verified print partners and turn idle press time into a steady stream of orders.</p>
+          <div className="partner__benefits">
+            {DATA.partnerBenefits.map((b) => { const Ic = iconMap[b.icon]; return (
+              <div key={b.title} className="partner__benefit">
+                <span className="partner__benefit-icon">{Ic && <Ic size={18} />}</span>
+                <div><p className="partner__benefit-title">{b.title}</p><p className="partner__benefit-desc">{b.desc}</p></div>
+              </div>
+            ); })}
+          </div>
+          <Button size="lg" variant="secondary" rightIcon={<ArrowRight size={16} />}>Become a Printing Partner</Button>
+        </div>
+        <div className="partner__panel">
+          <div><div className="partner__stat-v">+38%</div><div className="partner__stat-l">Avg. monthly order growth</div></div>
+          <div className="partner__rows">
+            {[["TrendingUp","New orders today","24"],["CreditCard","Payout this week","₹1,84,500"],["BadgeCheck","On-time rate","98.6%"],["Users","Repeat customers","312"]].map(([ic, label, val]) => {
+              const Ic = iconMap[ic]; return (
+              <div key={label} className="partner__row">
+                <span>{Ic && <Ic size={16} />} {label}</span><strong>{val}</strong>
+              </div>
+            );})}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Testimonials ── */
+function Testimonials() {
+  const items = [...DATA.testimonials, ...DATA.testimonials];
+  return (
+    <section className="sec pe-container">
+      <SectionHead eyebrow="Customer stories" title="Trusted by teams across industries"
+        sub="Marketing leads, founders and operations managers rely on PrintEve." />
+      <div className="marq"><div className="marq__track">
+        {items.map((t, i) => (
+          <figure key={i} className="tmt" style={{ margin: 0 }}>
+            <Quote size={22} className="tmt__quote" />
+            <div className="tmt__stars">{Array.from({ length: 5 }).map((_, k) => <StarFill key={k} size={15} />)}</div>
+            <blockquote className="tmt__text">{t.quote}</blockquote>
+            <figcaption className="tmt__by">
+              <span className="tmt__avatar">{t.name.split(" ").map(w => w[0]).slice(0,2).join("")}</span>
+              <span><span className="tmt__name">{t.name}</span><span className="tmt__role">{t.role}</span></span>
+            </figcaption>
+          </figure>
+        ))}
+      </div></div>
+    </section>
+  );
+}
+
+/* ── FAQ ── */
+function Faq() {
+  return (
+    <section className="sec sec--alt">
+      <div className="pe-container faq">
+        <div className="faq__head">
+          <span className="sec__eyebrow">FAQ</span>
+          <h2 className="sec__title" style={{ maxWidth: "100%", textAlign: "center" }}>Frequently asked questions</h2>
+          <p className="sec__sub" style={{ marginInline: "auto" }}>Answers on ordering, artwork, pricing and delivery.</p>
+        </div>
+        <Accordion items={DATA.faqs} defaultOpen={0} />
+      </div>
+    </section>
+  );
+}
+
+/* ── Final CTA ── */
+function FinalCta() {
+  return (
+    <section className="sec pe-container">
+      <div className="finalcta">
+        <h2 className="finalcta__title">Ready to print something amazing?</h2>
+        <p className="finalcta__sub">Get instant pricing, upload your artwork, and place your order in minutes.</p>
+        <div className="finalcta__btns">
+          <Button size="lg" className="finalcta__btn-light" rightIcon={<ArrowRight size={16} />}>Start Printing</Button>
+          <Button size="lg" variant="ghost" className="finalcta__btn-ghost">Contact Us</Button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Footer ── */
+function SiteFooter() {
+  const socialPaths = [
+    ["facebook", "M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z"],
+    ["instagram", "M12 2.2c2.7 0 3 .01 4.1.06 1 .05 1.6.2 2 .35.5.2.9.4 1.3.8.4.4.6.8.8 1.3.15.4.3 1 .35 2 .05 1.1.06 1.4.06 4.1s-.01 3-.06 4.1c-.05 1-.2 1.6-.35 2-.2.5-.4.9-.8 1.3-.4.4-.8.6-1.3.8-.4.15-1 .3-2 .35-1.1.05-1.4.06-4.1.06s-3-.01-4.1-.06c-1-.05-1.6-.2-2-.35-.5-.2-.9-.4-1.3-.8-.4-.4-.6-.8-.8-1.3-.15-.4-.3-1-.35-2C4.31 15 4.3 14.7 4.3 12s.01-3 .06-4.1c.05-1 .2-1.6.35-2 .2-.5.4-.9.8-1.3.4-.4.8-.6 1.3-.8.4-.15 1-.3 2-.35C9 2.21 9.3 2.2 12 2.2Zm0 4.67a5.13 5.13 0 1 0 0 10.26 5.13 5.13 0 0 0 0-10.26Zm0 1.8a3.33 3.33 0 1 1 0 6.66 3.33 3.33 0 0 1 0-6.66Zm5.34-3.34a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4Z"],
+    ["twitter", "M18.24 3h3.06l-6.69 7.65L22.5 21h-6.16l-4.83-6.32L5.96 21H2.9l7.16-8.18L2 3h6.31l4.36 5.77L18.24 3Zm-1.07 16.17h1.7L7.93 4.74H6.1l11.07 14.43Z"],
+    ["linkedin", "M6.94 8.5H3.56V20.5H6.94V8.5ZM5.25 3.5a1.94 1.94 0 1 0 0 3.88 1.94 1.94 0 0 0 0-3.88ZM20.5 20.5h-3.38v-5.84c0-1.39-.5-2.34-1.76-2.34-.96 0-1.53.65-1.78 1.27-.09.22-.11.53-.11.84v6.07H10.1s.04-9.85 0-10.86h3.38v1.54a3.36 3.36 0 0 1 3.04-1.67c2.22 0 3.98 1.45 3.98 4.56v6.43Z"],
+  ];
+  const cols = [
+    { h: "Products", links: ["Business Cards","Flyers","Brochures","Posters","Banners","Packaging"] },
+    { h: "Support", links: ["Contact Us","Track Order","My Orders","FAQs","About Us"] },
+    { h: "Company", links: ["Our Story","All Products","Bulk Orders","Become a Partner"] },
+  ];
+  return (
+    <footer className="ft">
+      <div className="pe-container ft__grid">
+        <div className="ft__brand">
+          <a href="#" className="hd__logo"><img src="../../assets/logo-mark.svg" alt="" /><span>PrintEve</span></a>
+          <p className="ft__about">Premium custom printing for businesses of every size — produced with precision and delivered on time, every time.</p>
+          <div className="ft__contact">
+            <span><Phone size={15} /> +91 12345 67890</span>
+            <span><Mail size={15} /> support@printeve.com</span>
+            <span><MapPin size={15} /> Print House, MG Road, Bengaluru 560001</span>
+          </div>
+          <div className="ft__social">
+            {socialPaths.map(([name, d]) => (
+              <a key={name} href="#" aria-label={name}><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d={d} /></svg></a>
+            ))}
+          </div>
+        </div>
+        {cols.map((col) => (
+          <div key={col.h} className="ft__col"><h3>{col.h}</h3><ul>{col.links.map(l => <li key={l}><a href="#">{l}</a></li>)}</ul></div>
+        ))}
+        <div className="ft__news">
+          <h3>Newsletter</h3>
+          <p>Print tips and partner offers, monthly.</p>
+          <form className="ft__news-form" onSubmit={(e) => e.preventDefault()}>
+            <input type="email" placeholder="you@company.com" aria-label="Email" />
+            <button type="submit" aria-label="Subscribe"><ArrowRight size={16} /></button>
+          </form>
+        </div>
+      </div>
+      <div className="pe-container ft__bottom">
+        <p>© {new Date().getFullYear()} PrintEve. All rights reserved.</p>
+        <div className="ft__legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Contact</a></div>
+      </div>
+    </footer>
+  );
+}
+
+/* ── Cart drawer ── */
+function CartDrawer({ open, onClose, items }) {
+  const total = items.reduce((s, i) => s + i.qty * i.unit, 0);
+  return (
+    <>
+      <div className={`drawer__scrim${open ? " is-open" : ""}`} onClick={onClose} />
+      <aside className={`drawer${open ? " is-open" : ""}`} aria-hidden={!open}>
+        <div className="drawer__head">
+          <h3>Your cart <span>({items.length})</span></h3>
+          <button className="hd__icon-btn" onClick={onClose} aria-label="Close"><X /></button>
+        </div>
+        <div className="drawer__body">
+          {items.length === 0 ? (
+            <div className="drawer__empty"><Cart size={32} /><p>Your cart is empty</p></div>
+          ) : items.map((it, i) => (
+            <div key={i} className="drawer__item">
+              <span className="drawer__item-img"><img src={`../../assets/illustrations/${it.img}.svg`} alt="" /></span>
+              <div className="drawer__item-info"><p className="drawer__item-name">{it.name}</p><p className="drawer__item-meta">{it.meta}</p></div>
+              <div className="drawer__item-price">{it.price}</div>
+            </div>
+          ))}
+        </div>
+        {items.length > 0 && (
+          <div className="drawer__foot">
+            <div className="drawer__total"><span>Subtotal</span><strong>₹{total.toLocaleString("en-IN")}</strong></div>
+            <Button fullWidth size="lg" rightIcon={<ArrowRight size={16} />} onClick={onClose}>Checkout</Button>
+          </div>
+        )}
+      </aside>
+    </>
+  );
+}
+
+/* ── Auth modal ── */
+function AuthModal({ open, onClose }) {
+  const [mode, setMode] = React.useState("login");
+  if (!open) return null;
+  return (
+    <div className="modal__scrim" onClick={onClose}>
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <button className="modal__close hd__icon-btn" onClick={onClose} aria-label="Close"><X /></button>
+        <div className="modal__brand"><img src="../../assets/logo-mark.svg" alt="" /><span>PrintEve</span></div>
+        <h3 className="modal__title">{mode === "login" ? "Welcome back" : "Create your account"}</h3>
+        <p className="modal__sub">{mode === "login" ? "Sign in to track orders and reorder." : "Join 10,000+ businesses printing with PrintEve."}</p>
+        <form className="modal__form" onSubmit={(e) => { e.preventDefault(); onClose(); }}>
+          {mode === "register" && <Input label="Full name" placeholder="Aditi Sharma" />}
+          <Input label="Email" type="email" placeholder="you@company.com" />
+          <Input label="Password" type="password" placeholder="••••••••" />
+          <Button fullWidth size="lg" type="submit">{mode === "login" ? "Sign In" : "Create Account"}</Button>
+        </form>
+        <p className="modal__switch">
+          {mode === "login" ? "New to PrintEve? " : "Already have an account? "}
+          <button onClick={() => setMode(mode === "login" ? "register" : "login")}>{mode === "login" ? "Create an account" : "Sign in"}</button>
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* ── App root ── */
+function App() {
+  const [dark, setDark] = React.useState(false);
+  const [cartOpen, setCartOpen] = React.useState(false);
+  const [authOpen, setAuthOpen] = React.useState(false);
+  const [cart, setCart] = React.useState([]);
+  const [toast, setToast] = React.useState(null);
+  const homeRef = React.useRef(null);
+
+  React.useEffect(() => {
+    if (homeRef.current) homeRef.current.setAttribute("data-theme", dark ? "dark" : "light");
+  }, [dark]);
+
+  function addToCart() {
+    const p = DATA.products[0];
+    setCart(c => [...c, { name: p.name, meta: "500 pcs · Matte", price: p.price, unit: 499, qty: 1, img: p.img }]);
+    setCartOpen(true);
+    setToast("Added to cart");
+    setTimeout(() => setToast(null), 2200);
+  }
+
+  return (
+    <div className="pe-home" ref={homeRef} data-theme="light">
+      <SiteHeader cartCount={cart.length} onCartClick={() => setCartOpen(true)} dark={dark} onToggleDark={() => setDark(v => !v)} onOpenAuth={() => setAuthOpen(true)} />
+      <main>
+        <Hero onAddToCart={addToCart} />
+        <Stats />
+        <Categories />
+        <HowItWorks />
+        <WhyChooseUs />
+        <FeaturedProducts onAddToCart={addToCart} />
+        <PartnerSection />
+        <Testimonials />
+        <Faq />
+        <FinalCta />
+      </main>
+      <SiteFooter />
+      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} items={cart} />
+      <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} />
+      {toast && <div className="toast"><Check size={16} /> {toast}</div>}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

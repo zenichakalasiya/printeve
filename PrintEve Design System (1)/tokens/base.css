@@ -1,0 +1,46 @@
+/* ============================================================
+   PrintEve — Base element styling & shared utility classes.
+   Minimal global resets; tokens do the heavy lifting.
+   ============================================================ */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-primary) 22%, transparent);
+}
+
+/* Accessible focus ring used across interactive elements */
+.focus-ring:focus-visible,
+:where(a, button, input, select, textarea):focus-visible {
+  outline: var(--ring-width) solid var(--color-ring);
+  outline-offset: var(--ring-offset);
+}
+
+/* Layout helper matching the production container */
+.pe-container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-px);
+}
+@media (min-width: 1024px) {
+  .pe-container { padding-inline: var(--container-px-lg); }
+}
+
+@keyframes pe-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}

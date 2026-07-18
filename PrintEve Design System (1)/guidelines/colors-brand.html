@@ -1,0 +1,26 @@
+<!-- @dsCard group="Colors" viewport="700x180" name="Brand greens" subtitle="Primary green scale — 50 to 900" -->
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8" /><link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; padding: 24px; background: var(--color-background); font-family: var(--font-sans); }
+  .scale { display: grid; grid-template-columns: repeat(10, 1fr); gap: 8px; }
+  .sw { display: flex; flex-direction: column; gap: 6px; }
+  .chip { height: 56px; border-radius: var(--radius-md); border: 1px solid rgba(15,23,42,.06); }
+  .k { font-size: 11px; font-weight: 600; color: var(--color-text); }
+  .v { font-size: 10px; color: var(--color-text-muted); font-family: var(--font-mono); }
+  .star { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+</style></head>
+<body>
+<div class="scale">
+  <div class="sw"><div class="chip" style="background:var(--green-50)"></div><span class="k">50</span><span class="v">#F0FDF4</span></div>
+  <div class="sw"><div class="chip" style="background:var(--green-100)"></div><span class="k">100</span><span class="v">#DCFCE7</span></div>
+  <div class="sw"><div class="chip" style="background:var(--green-200)"></div><span class="k">200</span><span class="v">#BBF7D0</span></div>
+  <div class="sw"><div class="chip" style="background:var(--green-300)"></div><span class="k">300</span><span class="v">#86EFAC</span></div>
+  <div class="sw"><div class="chip" style="background:var(--green-400)"></div><span class="k">400</span><span class="v">#4ADE80</span></div>
+  <div class="sw"><div class="chip star" style="background:var(--green-500)"></div><span class="k">500</span><span class="v">#22C55E</span></div>
+  <div class="sw"><div class="chip star" style="background:var(--green-600)"></div><span class="k">600 ★</span><span class="v">#16A34A</span></div>
+  <div class="sw"><div class="chip" style="background:var(--green-700)"></div><span class="k">700</span><span class="v">#15803D</span></div>
+  <div class="sw"><div class="chip" style="background:var(--green-800)"></div><span class="k">800</span><span class="v">#166534</span></div>
+  <div class="sw"><div class="chip" style="background:var(--green-900)"></div><span class="k">900</span><span class="v">#14532D</span></div>
+</div>
+</body></html>
