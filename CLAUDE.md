@@ -40,5 +40,12 @@ Prototypes served locally: `npx serve -l 4321 "PrintEve Mobile App Redesign-hand
 - The `/app` build is a **prototype/demo**: auth (OTP), payment (slide-to-pay) and order tracking are simulated, no backend.
 - Commit only when asked; branch off `main` for new work. GitHub remote is `zenichakalasiya/printeve`.
 
+## Deployment
+Repo: https://github.com/zenichakalasiya/printeve
+Live URL: https://zenichakalasiya.github.io/printeve/
+- Final mobile app: https://zenichakalasiya.github.io/printeve/app/
+- Design prototypes: https://zenichakalasiya.github.io/printeve/proto/
+Auto-deploys on push to `main` via `.github/workflows/deploy.yml` (static export → GitHub Pages, basePath `/printeve`).
+
 ## Handoff
 Latest session state is in [HANDOFF.md](HANDOFF.md) — read it first.
