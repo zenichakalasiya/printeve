@@ -33,3 +33,30 @@
     animation: none;
   }
 }
+
+/* Splash scattered-card float — keeps each card's --r rotation while bobbing */
+@keyframes pe-float {
+  0%,
+  100% {
+    transform: translateY(0) var(--r, none);
+  }
+  50% {
+    transform: translateY(-9px) var(--r, none);
+  }
+}
+.pe-float {
+  animation: pe-float 5s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pe-float {
+    animation: none;
+    transform: var(--r, none);
+  }
+}
+
+/* Hide desktop header and footer on mobile sub-app routes */
+body:has(.mobile-app-root) header,
+body:has(.mobile-app-root) footer {
+  display: none !important;
+}
+

@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['DM Sans','system-ui','sans-serif'],serif:['Fraunces','Georgia','serif']}}}}</script>
+<script src="./image-slot.js"></script>
+<style>
+  body{margin:0;background:#111827;font-family:'DM Sans',system-ui,sans-serif}
+  a{color:#16A34A;text-decoration:none}a:hover{color:#15803D}
+  .noscroll{scrollbar-width:none;-ms-overflow-style:none}
+  .noscroll::-webkit-scrollbar{display:none}
+  @keyframes pe-toast{0%{opacity:0;transform:translateY(-14px) scale(.96)}12%{opacity:1;transform:none}88%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-8px)}}
+  @keyframes pe-sheet{from{transform:translateY(100%)}to{transform:translateY(0)}}
+  @keyframes pe-fade{from{opacity:0}to{opacity:1}}
+  @keyframes pe-pop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+  .pe-toast{animation:pe-toast 2.4s ease forwards}
+  .pe-sheet{animation:pe-sheet .34s cubic-bezier(.22,1,.36,1)}
+  .pe-fade{animation:pe-fade .2s ease}
+  .pe-pop{animation:pe-pop .3s ease}
+  image-slot{--is-radius:0}
+  .pe-slider{-webkit-appearance:none;appearance:none;background:transparent;cursor:grab}
+  .pe-slider::-webkit-slider-thumb{-webkit-appearance:none;width:56px;height:56px;border-radius:50%;background:transparent;cursor:grab}
+  .pe-slider::-moz-range-thumb{width:56px;height:56px;border:0;background:transparent;cursor:grab}
+</style>
+</helmet>
+
+<div class="min-h-screen w-full flex items-center justify-center py-0 sm:py-6" style="font-family:'DM Sans',system-ui,sans-serif">
+  <div class="relative w-[390px] h-[844px] bg-black rounded-[46px] p-[10px] shadow-[0_40px_80px_-20px_rgba(0,0,0,.6)] shrink-0">
+    <div class="absolute top-[16px] left-1/2 -translate-x-1/2 w-[112px] h-[30px] bg-black rounded-full z-50"></div>
+
+    <div class="w-full h-full bg-[#FCFAF7] rounded-[38px] overflow-hidden relative flex flex-col">
+
+      <!-- STATUS BAR -->
+      <div class="h-[44px] shrink-0 px-7 flex items-end justify-between pb-1.5 bg-[#FCFAF7] text-[#1A1A1A] relative z-30">
+        <span class="text-[14px] font-bold tracking-tight">9:41</span>
+        <div class="flex items-center gap-1.5">
+          <svg width="17" height="12" viewBox="0 0 20 14" fill="currentColor"><rect x="0" y="9" width="3" height="5" rx="1"/><rect x="5" y="6" width="3" height="8" rx="1"/><rect x="10" y="3" width="3" height="11" rx="1"/><rect x="15" y="0" width="3" height="14" rx="1"/></svg>
+          <svg width="16" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20.5a1.6 1.6 0 100-3.2 1.6 1.6 0 000 3.2Z"/><path d="M4.5 11.5a10.5 10.5 0 0115 0" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M7.6 14.7a6 6 0 018.8 0" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <div class="flex items-center gap-0.5"><div class="w-[22px] h-[11px] rounded-[3px] border-2 border-[#1A1A1A] p-[1.5px]"><div class="h-full w-[80%] bg-[#1A1A1A] rounded-[1px]"></div></div><div class="w-[1.5px] h-[4px] bg-[#1A1A1A] rounded-full"></div></div>
+        </div>
+      </div>
+
+      <sc-if value="{{ isTab }}">
+      <!-- SCROLL AREA -->
+      <div class="flex-1 min-h-0 overflow-y-auto noscroll relative">
+
+        <!-- ============ HOME ============ -->
+        <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+        <div class="pb-28">
+
+          <!-- Header (sticky) -->
+          <div class="sticky top-0 z-20 bg-[#FCFAF7]/95 backdrop-blur-md px-5 pt-2 pb-3">
+            <div class="flex items-center justify-between">
+              <button onClick="{{ openCity }}" class="flex items-center gap-2.5 text-left active:opacity-70">
+                <span class="w-10 h-10 rounded-2xl bg-[#DCFCE7] text-[#16A34A] flex items-center justify-center shrink-0">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                </span>
+                <span class="leading-none">
+                  <span class="text-[10px] font-bold text-[#16A34A] uppercase tracking-[.12em] flex items-center gap-1">Deliver to
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                  </span>
+                  <span class="block text-[15px] font-extrabold text-[#1A1A1A] mt-[3px] tracking-tight">{{ city }}, {{ region }}</span>
+                </span>
+              </button>
+              <div class="flex items-center gap-2.5">
+                <button onClick="{{ openBell }}" class="relative w-10 h-10 rounded-full bg-white border border-[#E5E7EB] flex items-center justify-center text-[#1A1A1A] active:scale-95 transition">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+                  <span class="absolute top-2 right-2.5 w-[7px] h-[7px] rounded-full bg-[#D9383A] ring-2 ring-white"></span>
+                </button>
+                <button onClick="{{ goProfile }}" class="w-10 h-10 rounded-full bg-[#16A34A] text-white flex items-center justify-center font-bold text-[13px] shadow-sm active:scale-95 transition" style="font-family:'Fraunces',serif">Z</button>
+              </div>
+            </div>
+
+            <!-- Greeting + Search -->
+            <p class="mt-3.5 text-[22px] leading-[1.1] text-[#1A1A1A] font-medium" style="font-family:'Fraunces',serif">Good morning, <span class="font-semibold italic">Zeni</span> <span class="inline-block">👋</span></p>
+            <button onClick="{{ goExplore }}" class="mt-3 w-full h-12 bg-white border border-[#E5E7EB] rounded-2xl px-4 flex items-center gap-2.5 text-left shadow-[0_2px_10px_-4px_rgba(0,0,0,.08)] active:scale-[.99] transition">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <span class="text-[13.5px] text-[#9CA3AF] font-medium truncate">Search cards, stickers, flyers…</span>
+            </button>
+          </div>
+
+          <!-- Hero carousel -->
+          <div class="px-5 mt-1">
+            <div class="relative rounded-[26px] overflow-hidden">
+              <div class="flex w-[300%] transition-transform duration-500 ease-out" style="transform: {{ heroTransform }}">
+                <!-- slide 1 -->
+                <button onClick="{{ nextHero }}" class="w-1/3 text-left">
+                  <div class="relative h-[168px] bg-gradient-to-br from-[#166534] via-[#16A34A] to-[#22C55E] p-5 flex flex-col justify-between overflow-hidden">
+                    <div class="absolute -right-8 -top-10 w-40 h-40 rounded-full bg-white/10"></div>
+                    <div class="absolute -right-2 bottom-2 w-24 h-24 rounded-full bg-white/10 blur-md"></div>
+                    <div class="relative">
+                      <span class="text-[9px] font-extrabold uppercase tracking-[.18em] bg-white/20 text-white px-2.5 py-1 rounded-full">Festive Offer</span>
+                      <h3 class="text-white text-[24px] leading-[1.05] font-semibold mt-2.5 max-w-[80%]" style="font-family:'Fraunces',serif">Corporate gifting, printed in 48 hrs</h3>
+                    </div>
+                    <span class="relative inline-flex w-fit items-center gap-1 bg-white text-[#16A34A] text-[12px] font-bold px-4 py-2 rounded-xl shadow">Explore
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </span>
+                  </div>
+                </button>
+                <!-- slide 2 -->
+                <button onClick="{{ nextHero }}" class="w-1/3 text-left">
+                  <div class="relative h-[168px] bg-[#1A1A1A] p-5 flex flex-col justify-between overflow-hidden">
+                    <div class="absolute right-4 top-4 text-[64px] font-black text-white/5 leading-none" style="font-family:'Fraunces',serif">20%</div>
+                    <div class="relative">
+                      <span class="text-[9px] font-extrabold uppercase tracking-[.18em] bg-[#D9383A] text-white px-2.5 py-1 rounded-full">Bulk Deal</span>
+                      <h3 class="text-white text-[24px] leading-[1.05] font-semibold mt-2.5 max-w-[82%]" style="font-family:'Fraunces',serif">Custom stickers, flat 20% off</h3>
+                    </div>
+                    <span class="relative inline-flex w-fit items-center gap-1 bg-[#22C55E] text-white text-[12px] font-bold px-4 py-2 rounded-xl">Grab deal
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </span>
+                  </div>
+                </button>
+                <!-- slide 3 -->
+                <button onClick="{{ nextHero }}" class="w-1/3 text-left">
+                  <div class="relative h-[168px] bg-[#F4EFE7] border border-[#EADFCF] p-5 flex flex-col justify-between overflow-hidden">
+                    <div class="absolute -right-6 -bottom-8 w-36 h-36 rounded-full bg-[#DCFCE7]"></div>
+                    <div class="relative">
+                      <span class="text-[9px] font-extrabold uppercase tracking-[.18em] bg-[#1A1A1A] text-white px-2.5 py-1 rounded-full">Print Anything</span>
+                      <h3 class="text-[#1A1A1A] text-[24px] leading-[1.05] font-semibold mt-2.5 max-w-[78%]" style="font-family:'Fraunces',serif">Upload art. We print &amp; deliver.</h3>
+                    </div>
+                    <span class="relative inline-flex w-fit items-center gap-1 bg-[#16A34A] text-white text-[12px] font-bold px-4 py-2 rounded-xl shadow">Start now
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </span>
+                  </div>
+                </button>
+              </div>
+              <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5">
+                <button onClick="{{ goHero0 }}" style="{{ dot0 }}"></button>
+                <button onClick="{{ goHero1 }}" style="{{ dot1 }}"></button>
+                <button onClick="{{ goHero2 }}" style="{{ dot2 }}"></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Promo chips strip -->
+          <sc-if value="{{ promoStrip }}" hint-placeholder-val="{{ true }}">
+          <div class="mt-4 flex gap-2.5 overflow-x-auto noscroll px-5 pb-1">
+            <div class="flex-none w-[150px] bg-white border border-[#E5E7EB] rounded-2xl p-3 flex items-center gap-2.5 shadow-[0_2px_8px_-4px_rgba(0,0,0,.06)]">
+              <span class="w-9 h-9 rounded-xl bg-[#FEF3C7] text-[#B45309] flex items-center justify-center shrink-0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5 5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></span>
+              <span class="min-w-0"><span class="block text-[11px] font-extrabold text-[#1A1A1A] leading-tight">FLAT ₹150 OFF</span><span class="block text-[9.5px] text-[#9CA3AF] font-semibold">First bulk order</span></span>
+            </div>
+            <div class="flex-none w-[150px] bg-white border border-[#E5E7EB] rounded-2xl p-3 flex items-center gap-2.5 shadow-[0_2px_8px_-4px_rgba(0,0,0,.06)]">
+              <span class="w-9 h-9 rounded-xl bg-[#DCFCE7] text-[#166534] flex items-center justify-center shrink-0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg></span>
+              <span class="min-w-0"><span class="block text-[11px] font-extrabold text-[#1A1A1A] leading-tight">FLASH DEALS</span><span class="block text-[9.5px] text-[#9CA3AF] font-semibold">Up to 25% off</span></span>
+            </div>
+            <div class="flex-none w-[150px] bg-white border border-[#E5E7EB] rounded-2xl p-3 flex items-center gap-2.5 shadow-[0_2px_8px_-4px_rgba(0,0,0,.06)]">
+              <span class="w-9 h-9 rounded-xl bg-[#DBEAFE] text-[#1D4ED8] flex items-center justify-center shrink-0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6H2v12h12Z"/><path d="M14 8h5l3 3v7h-8"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></span>
+              <span class="min-w-0"><span class="block text-[11px] font-extrabold text-[#1A1A1A] leading-tight">FREE DELIVERY</span><span class="block text-[9.5px] text-[#9CA3AF] font-semibold">On ₹1000+ orders</span></span>
+            </div>
+          </div>
+          </sc-if>
+
+          <!-- Categories -->
+          <div class="px-5 mt-6">
+            <div class="flex items-center justify-between">
+              <h2 class="text-[17px] font-semibold text-[#1A1A1A] tracking-tight" style="font-family:'Fraunces',serif">Shop by category</h2>
+              <button onClick="{{ goExplore }}" class="text-[11px] font-bold text-[#16A34A] flex items-center gap-0.5">See all<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+            </div>
+            <div class="grid grid-cols-4 gap-x-2 gap-y-4 mt-4">
+              <button onClick="{{ goExplore }}" class="flex flex-col items-center gap-1.5 active:scale-95 transition"><span class="w-14 h-14 rounded-2xl bg-[#DCFCE7] text-[#16A34A] flex items-center justify-center shadow-[0_3px_10px_-4px_rgba(22,163,74,.4)]"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 8h20"/><path d="M6 13h5"/></svg></span><span class="text-[10.5px] font-semibold text-[#374151] text-center leading-tight">Visiting Cards</span></button>
+              <button onClick="{{ goExplore }}" class="flex flex-col items-center gap-1.5 active:scale-95 transition"><span class="w-14 h-14 rounded-2xl bg-[#FEF3C7] text-[#B45309] flex items-center justify-center shadow-[0_3px_10px_-4px_rgba(180,83,9,.35)]"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12 12 20l-8-8V4h8l8 8Z"/><circle cx="8.5" cy="8.5" r="1.5"/></svg></span><span class="text-[10.5px] font-semibold text-[#374151] text-center leading-tight">Stickers</span></button>
+              <button onClick="{{ goExplore }}" class="flex flex-col items-center gap-1.5 active:scale-95 transition"><span class="w-14 h-14 rounded-2xl bg-[#DBEAFE] text-[#1D4ED8] flex items-center justify-center shadow-[0_3px_10px_-4px_rgba(29,78,216,.3)]"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h2l4 4V6L6 10H4a1 1 0 0 0-1 1Z"/><path d="M14 8a5 5 0 0 1 0 8"/></svg></span><span class="text-[10.5px] font-semibold text-[#374151] text-center leading-tight">Banners</span></button>
+              <button onClick="{{ goExplore }}" class="flex flex-col items-center gap-1.5 active:scale-95 transition"><span class="w-14 h-14 rounded-2xl bg-[#FCE7F3] text-[#BE185D] flex items-center justify-center shadow-[0_3px_10px_-4px_rgba(190,24,93,.3)]"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6v20h12V8l-4-6Z"/><path d="M14 2v6h4"/><path d="M8 13h8M8 17h5"/></svg></span><span class="text-[10.5px] font-semibold text-[#374151] text-center leading-tight">Flyers</span></button>
+              <button onClick="{{ goExplore }}" class="flex flex-col items-center gap-1.5 active:scale-95 transition"><span class="w-14 h-14 rounded-2xl bg-[#EDE9FE] text-[#6D28D9] flex items-center justify-center shadow-[0_3px_10px_-4px_rgba(109,40,217,.3)]"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span><span class="text-[10.5px] font-semibold text-[#374151] text-center leading-tight">Stationery</span></button>
+              <button onClick="{{ goExplore }}" class="flex flex-col items-center gap-1.5 active:scale-95 transition"><span class="w-14 h-14 rounded-2xl bg-[#DCFCE7] text-[#16A34A] flex items-center justify-center shadow-[0_3px_10px_-4px_rgba(22,163,74,.35)]"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M9 14.5 8 22l4-2 4 2-1-7.5"/></svg></span><span class="text-[10.5px] font-semibold text-[#374151] text-center leading-tight">Badges</span></button>
+              <button onClick="{{ goExplore }}" class="flex flex-col items-center gap-1.5 active:scale-95 transition"><span class="w-14 h-14 rounded-2xl bg-[#FFEDD5] text-[#C2410C] flex items-center justify-center shadow-[0_3px_10px_-4px_rgba(194,65,12,.3)]"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5V8Z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/></svg></span><span class="text-[10.5px] font-semibold text-[#374151] text-center leading-tight">Packaging</span></button>
+              <button onClick="{{ goExplore }}" class="flex flex-col items-center gap-1.5 active:scale-95 transition"><span class="w-14 h-14 rounded-2xl bg-[#F3F4F6] text-[#1A1A1A] flex items-center justify-center shadow-[0_3px_10px_-4px_rgba(0,0,0,.2)]"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span><span class="text-[10.5px] font-semibold text-[#374151] text-center leading-tight">All Products</span></button>
+            </div>
+          </div>
+
+          <!-- Popular products -->
+          <div class="px-5 mt-7">
+            <div class="flex items-center justify-between">
+              <h2 class="text-[17px] font-semibold text-[#1A1A1A] tracking-tight" style="font-family:'Fraunces',serif">Popular near you</h2>
+              <span class="text-[10.5px] text-[#9CA3AF] font-semibold flex items-center gap-1"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>48-hr dispatch</span>
+            </div>
+            <div class="flex gap-3.5 overflow-x-auto noscroll mt-4 pb-2">
+              <!-- card 1 -->
+              <div class="w-[168px] flex-none bg-white border border-[#E5E7EB] rounded-[20px] overflow-hidden shadow-[0_4px_14px_-6px_rgba(0,0,0,.1)] flex flex-col">
+                <div class="relative h-[112px] bg-[#F3F4F6]">
+                  <image-slot id="pe-prod-trifold" src="https://picsum.photos/seed/peBrochure/700/500" shape="rect" placeholder="Tri-fold mockup"></image-slot>
+                  <div class="absolute top-0 left-0 bg-[#D9383A] text-white text-[9px] font-black px-2 py-1 rounded-br-xl tracking-wide pointer-events-none">SAVE 20%</div>
+                  <div class="absolute bottom-2 left-2 bg-white/95 text-[#1A1A1A] text-[9.5px] font-bold py-0.5 px-1.5 rounded-md flex items-center gap-0.5 shadow-sm pointer-events-none"><svg width="11" height="11" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" stroke-width="1"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg>4.9</div>
+                </div>
+                <div class="p-3 flex-1 flex flex-col justify-between">
+                  <div><h4 class="text-[12.5px] font-bold text-[#1A1A1A] leading-snug">Tri-Fold Brochures</h4><span class="text-[9.5px] text-[#9CA3AF] font-semibold">Bestseller · 210 orders</span></div>
+                  <div class="mt-2.5 flex items-end justify-between pt-2.5 border-t border-[#F3F4F6]">
+                    <span class="leading-none"><span class="block text-[9px] text-[#9CA3AF] font-semibold">from</span><span class="text-[15px] font-extrabold text-[#1A1A1A]" style="font-family:'Fraunces',serif">₹153</span></span>
+                    <button onClick="{{ addTrifold }}" class="bg-[#16A34A] text-white text-[10px] font-extrabold py-2 px-3.5 rounded-xl active:scale-90 transition shadow-[0_4px_10px_-3px_rgba(22,163,74,.5)]">ADD</button>
+                  </div>
+                </div>
+              </div>
+              <!-- card 2 -->
+              <div class="w-[168px] flex-none bg-white border border-[#E5E7EB] rounded-[20px] overflow-hidden shadow-[0_4px_14px_-6px_rgba(0,0,0,.1)] flex flex-col">
+                <div class="relative h-[112px] bg-[#F3F4F6]">
+                  <image-slot id="pe-prod-cards" src="https://picsum.photos/seed/peCard/700/500" shape="rect" placeholder="Business card mockup"></image-slot>
+                  <div class="absolute bottom-2 left-2 bg-white/95 text-[#1A1A1A] text-[9.5px] font-bold py-0.5 px-1.5 rounded-md flex items-center gap-0.5 shadow-sm pointer-events-none"><svg width="11" height="11" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" stroke-width="1"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg>4.8</div>
+                </div>
+                <div class="p-3 flex-1 flex flex-col justify-between">
+                  <div><h4 class="text-[12.5px] font-bold text-[#1A1A1A] leading-snug">Business Cards</h4><span class="text-[9.5px] text-[#9CA3AF] font-semibold">Rounded corner · 124 orders</span></div>
+                  <div class="mt-2.5 flex items-end justify-between pt-2.5 border-t border-[#F3F4F6]">
+                    <span class="leading-none"><span class="block text-[9px] text-[#9CA3AF] font-semibold">from</span><span class="text-[15px] font-extrabold text-[#1A1A1A]" style="font-family:'Fraunces',serif">₹750</span></span>
+                    <button onClick="{{ addCards }}" class="bg-[#16A34A] text-white text-[10px] font-extrabold py-2 px-3.5 rounded-xl active:scale-90 transition shadow-[0_4px_10px_-3px_rgba(22,163,74,.5)]">ADD</button>
+                  </div>
+                </div>
+              </div>
+              <!-- card 3 -->
+              <div class="w-[168px] flex-none bg-white border border-[#E5E7EB] rounded-[20px] overflow-hidden shadow-[0_4px_14px_-6px_rgba(0,0,0,.1)] flex flex-col">
+                <div class="relative h-[112px] bg-[#F3F4F6]">
+                  <image-slot id="pe-prod-sticker" src="https://picsum.photos/seed/peSticker/700/500" shape="rect" placeholder="Sticker mockup"></image-slot>
+                  <div class="absolute top-0 left-0 bg-[#D9383A] text-white text-[9px] font-black px-2 py-1 rounded-br-xl tracking-wide pointer-events-none">SAVE 15%</div>
+                  <div class="absolute bottom-2 left-2 bg-white/95 text-[#1A1A1A] text-[9.5px] font-bold py-0.5 px-1.5 rounded-md flex items-center gap-0.5 shadow-sm pointer-events-none"><svg width="11" height="11" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" stroke-width="1"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg>4.9</div>
+                </div>
+                <div class="p-3 flex-1 flex flex-col justify-between">
+                  <div><h4 class="text-[12.5px] font-bold text-[#1A1A1A] leading-snug">Die-Cut Stickers</h4><span class="text-[9.5px] text-[#9CA3AF] font-semibold">Waterproof vinyl · 84 orders</span></div>
+                  <div class="mt-2.5 flex items-end justify-between pt-2.5 border-t border-[#F3F4F6]">
+                    <span class="leading-none"><span class="block text-[9px] text-[#9CA3AF] font-semibold">from</span><span class="text-[15px] font-extrabold text-[#1A1A1A]" style="font-family:'Fraunces',serif">₹199</span></span>
+                    <button onClick="{{ addStickers }}" class="bg-[#16A34A] text-white text-[10px] font-extrabold py-2 px-3.5 rounded-xl active:scale-90 transition shadow-[0_4px_10px_-3px_rgba(22,163,74,.5)]">ADD</button>
+                  </div>
+                </div>
+              </div>
+              <!-- card 4 -->
+              <div class="w-[168px] flex-none bg-white border border-[#E5E7EB] rounded-[20px] overflow-hidden shadow-[0_4px_14px_-6px_rgba(0,0,0,.1)] flex flex-col">
+                <div class="relative h-[112px] bg-[#F3F4F6]">
+                  <image-slot id="pe-prod-flyer" src="https://picsum.photos/seed/peFlyer/700/500" shape="rect" placeholder="Flyer mockup"></image-slot>
+                  <div class="absolute bottom-2 left-2 bg-white/95 text-[#1A1A1A] text-[9.5px] font-bold py-0.5 px-1.5 rounded-md flex items-center gap-0.5 shadow-sm pointer-events-none"><svg width="11" height="11" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" stroke-width="1"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg>4.7</div>
+                </div>
+                <div class="p-3 flex-1 flex flex-col justify-between">
+                  <div><h4 class="text-[12.5px] font-bold text-[#1A1A1A] leading-snug">Gloss Flyers</h4><span class="text-[9.5px] text-[#9CA3AF] font-semibold">170 GSM · 210 orders</span></div>
+                  <div class="mt-2.5 flex items-end justify-between pt-2.5 border-t border-[#F3F4F6]">
+                    <span class="leading-none"><span class="block text-[9px] text-[#9CA3AF] font-semibold">from</span><span class="text-[15px] font-extrabold text-[#1A1A1A]" style="font-family:'Fraunces',serif">₹499</span></span>
+                    <button onClick="{{ addFlyers }}" class="bg-[#16A34A] text-white text-[10px] font-extrabold py-2 px-3.5 rounded-xl active:scale-90 transition shadow-[0_4px_10px_-3px_rgba(22,163,74,.5)]">ADD</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- How it works -->
+          <sc-if value="{{ howItWorks }}" hint-placeholder-val="{{ true }}">
+          <div class="px-5 mt-6">
+            <div class="bg-white border border-[#E5E7EB] rounded-[22px] p-5">
+              <h3 class="text-[13px] font-bold text-[#1A1A1A] uppercase tracking-[.1em] flex items-center gap-1.5"><svg width="15" height="15" viewBox="0 0 24 24" fill="#16A34A"><path d="M12 3l1.9 4.6L18.5 9.5 13.9 11.4 12 16l-1.9-4.6L5.5 9.5l4.6-1.9L12 3Z"/></svg>How PrintEve works</h3>
+              <div class="flex items-start justify-between gap-1 mt-4">
+                <div class="flex-1 flex flex-col items-center text-center"><span class="w-9 h-9 rounded-full bg-[#DCFCE7] text-[#16A34A] font-bold text-[13px] flex items-center justify-center" style="font-family:'Fraunces',serif">1</span><span class="text-[11px] font-bold text-[#1A1A1A] mt-2">Configure</span><span class="text-[9px] text-[#9CA3AF] mt-0.5 leading-tight">Size, GSM &amp; finish</span></div>
+                <div class="h-px flex-none w-6 bg-[#E5E7EB] mt-4"></div>
+                <div class="flex-1 flex flex-col items-center text-center"><span class="w-9 h-9 rounded-full bg-[#DCFCE7] text-[#16A34A] font-bold text-[13px] flex items-center justify-center" style="font-family:'Fraunces',serif">2</span><span class="text-[11px] font-bold text-[#1A1A1A] mt-2">Upload</span><span class="text-[9px] text-[#9CA3AF] mt-0.5 leading-tight">PDF / AI / CDR</span></div>
+                <div class="h-px flex-none w-6 bg-[#E5E7EB] mt-4"></div>
+                <div class="flex-1 flex flex-col items-center text-center"><span class="w-9 h-9 rounded-full bg-[#16A34A] text-white font-bold text-[13px] flex items-center justify-center" style="font-family:'Fraunces',serif">3</span><span class="text-[11px] font-bold text-[#1A1A1A] mt-2">Delivered</span><span class="text-[9px] text-[#9CA3AF] mt-0.5 leading-tight">Pan-India, fast</span></div>
+              </div>
+            </div>
+          </div>
+          </sc-if>
+
+          <!-- USP scroller -->
+          <div class="mt-5 flex gap-3 overflow-x-auto noscroll px-5 pb-1">
+            <div class="flex-none w-[150px] bg-gradient-to-br from-[#166534] to-[#16A34A] text-white rounded-2xl p-4"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg><span class="block text-[12.5px] font-bold mt-2.5 leading-tight">Verified printers</span><span class="block text-[10px] text-white/70 mt-0.5">Quality-audited partners</span></div>
+            <div class="flex-none w-[150px] bg-white border border-[#E5E7EB] rounded-2xl p-4 text-[#1A1A1A]"><span class="text-[#1D4ED8]"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6H2v12h12Z"/><path d="M14 8h5l3 3v7h-8"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></span><span class="block text-[12.5px] font-bold mt-2.5 leading-tight">Express shipping</span><span class="block text-[10px] text-[#9CA3AF] mt-0.5">Doorstep delivery</span></div>
+            <div class="flex-none w-[150px] bg-white border border-[#E5E7EB] rounded-2xl p-4 text-[#1A1A1A]"><span class="text-[#B45309]"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span><span class="block text-[12.5px] font-bold mt-2.5 leading-tight">Secure files</span><span class="block text-[10px] text-[#9CA3AF] mt-0.5">Encrypted uploads</span></div>
+          </div>
+
+        </div>
+        </sc-if>
+
+        <!-- ============ OTHER SCREENS (placeholders for now) ============ -->
+        <sc-if value="{{ isExplore }}">
+        <div class="pb-28 pe-fade">
+          <div class="sticky top-0 z-20 bg-[#FCFAF7]/95 backdrop-blur-md px-5 pt-4 pb-3">
+            <h1 class="text-[24px] font-semibold text-[#1A1A1A]" style="font-family:'Fraunces',serif">Explore prints</h1>
+            <div class="mt-3 w-full h-11 bg-white border border-[#E5E7EB] rounded-2xl px-4 flex items-center gap-2.5 shadow-[0_2px_10px_-4px_rgba(0,0,0,.08)]"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><span class="text-[13px] text-[#9CA3AF] font-medium">Search cards, stickers, flyers…</span></div>
+            <div class="flex gap-2 overflow-x-auto noscroll mt-3 -mx-5 px-5"><sc-for list="{{ xchips }}" as="c" hint-placeholder-count="6"><button onClick="{{ c.onSelect }}" class="flex-none h-9 px-3.5 rounded-full text-[12.5px] font-bold border transition" style="{{ c.style }}">{{ c.label }}</button></sc-for></div>
+          </div>
+          <div class="px-5 grid grid-cols-2 gap-3.5 mt-1">
+            <sc-for list="{{ exploreItems }}" as="p" hint-placeholder-count="6">
+              <button onClick="{{ p.onOpen }}" class="text-left bg-white border border-[#E5E7EB] rounded-[20px] overflow-hidden shadow-[0_4px_14px_-6px_rgba(0,0,0,.1)] active:scale-[.98] transition">
+                <span class="relative block h-[120px] bg-[#F3F4F6]"><image-slot id="{{ p.slot }}" src="{{ p.img }}" shape="rect" placeholder="{{ p.name }}"></image-slot><span class="absolute top-0 left-0 bg-[#D9383A] text-white text-[9px] font-black px-2 py-1 rounded-br-xl pointer-events-none">{{ p.save }}</span></span>
+                <span class="block p-3">
+                  <span class="flex items-center gap-1.5"><span class="bg-[#DCFCE7] text-[#166534] text-[9px] font-black px-1 py-0.5 rounded flex items-center gap-0.5">{{ p.rating }}<svg width="9" height="9" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg></span><span class="text-[9px] text-[#9CA3AF] font-semibold">{{ p.eta }}</span></span>
+                  <span class="block text-[13px] font-bold text-[#1A1A1A] mt-1.5 leading-tight">{{ p.name }}</span>
+                  <span class="flex items-center justify-between mt-2 pt-2 border-t border-[#F3F4F6]"><span class="text-[14px] font-extrabold text-[#1A1A1A]" style="font-family:'Fraunces',serif">from ₹{{ p.from }}</span><span class="w-7 h-7 rounded-full bg-[#16A34A] text-white flex items-center justify-center"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></span>
+                </span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+        </sc-if>
+        <sc-if value="{{ isOrders }}">
+        <div class="pb-28 pe-fade px-5">
+          <h1 class="text-[24px] font-semibold text-[#1A1A1A] pt-4" style="font-family:'Fraunces',serif">Your orders</h1>
+          <div class="flex flex-col gap-3 mt-4">
+            <sc-for list="{{ orderList }}" as="o" hint-placeholder-count="2">
+              <button onClick="{{ o.onOpen }}" class="w-full bg-white border border-[#E5E7EB] rounded-[20px] p-3.5 text-left flex items-center gap-3 shadow-[0_4px_14px_-6px_rgba(0,0,0,.1)] active:scale-[.99] transition">
+                <span class="w-14 h-14 rounded-xl overflow-hidden bg-[#F3F4F6] flex-none relative"><image-slot id="{{ o.slot }}" src="{{ o.img }}" shape="rect" placeholder="Order"></image-slot></span>
+                <span class="flex-1 min-w-0"><span class="flex items-center justify-between gap-2"><span class="text-[10px] font-bold text-[#9CA3AF]">#{{ o.id }}</span><span class="text-[8.5px] font-black px-2 py-0.5 rounded-full whitespace-nowrap" style="{{ o.statusStyle }}">{{ o.statusLabel }}</span></span><span class="block text-[13.5px] font-bold text-[#1A1A1A] mt-1 truncate">{{ o.name }}</span><span class="block text-[10.5px] text-[#9CA3AF] font-semibold mt-0.5">{{ o.qty }} pcs · ₹{{ o.total }} · {{ o.placed }}</span></span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+        </sc-if>
+        <sc-if value="{{ isCart }}">
+        <div class="pb-28 pe-fade">
+          <div class="px-5 pt-4"><h1 class="text-[24px] font-semibold text-[#1A1A1A]" style="font-family:'Fraunces',serif">Your cart</h1></div>
+          <sc-if value="{{ cartEmpty }}">
+            <div class="flex flex-col items-center justify-center text-center px-8 py-16"><span class="w-16 h-16 rounded-3xl bg-[#DCFCE7] text-[#16A34A] flex items-center justify-center mb-4"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="18" cy="21" r="1"/><path d="M3 3h2l2.4 12.4a1 1 0 0 0 1 .6h9.7a1 1 0 0 0 1-.8L21 7H6"/></svg></span><h2 class="text-[18px] font-semibold text-[#1A1A1A]" style="font-family:'Fraunces',serif">Your cart is empty</h2><p class="text-[12.5px] text-[#9CA3AF] mt-1.5">Configure a print to get started.</p><button onClick="{{ goExplore }}" class="mt-5 bg-[#16A34A] text-white text-[13px] font-bold px-6 py-3 rounded-full">Browse products</button></div>
+          </sc-if>
+          <sc-if value="{{ cartFull }}">
+          <div class="px-5 mt-4 flex flex-col gap-3">
+            <sc-for list="{{ cartItems }}" as="i" hint-placeholder-count="2">
+              <div class="bg-white border border-[#E5E7EB] rounded-[20px] p-3 flex gap-3 shadow-[0_4px_14px_-6px_rgba(0,0,0,.1)]">
+                <span class="w-16 h-16 rounded-xl overflow-hidden bg-[#F3F4F6] flex-none relative"><image-slot id="{{ i.slot }}" src="{{ i.img }}" shape="rect" placeholder="{{ i.name }}"></image-slot></span>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-start justify-between gap-2"><h4 class="text-[13px] font-bold text-[#1A1A1A] leading-tight">{{ i.name }}</h4><button onClick="{{ i.onRemove }}" class="text-[#9CA3AF] flex-none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+                  <p class="text-[10px] text-[#9CA3AF] font-semibold mt-0.5 leading-snug">{{ i.spec }}</p>
+                  <p class="text-[9.5px] text-[#16A34A] font-bold mt-0.5 flex items-center gap-1 truncate"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6v20h12V8l-4-6Z"/><path d="M14 2v6h4"/></svg>{{ i.file }}</p>
+                  <div class="flex items-center justify-between mt-2">
+                    <div class="flex items-center gap-2 bg-[#F3F4F6] rounded-full p-1"><button onClick="{{ i.onDec }}" class="w-6 h-6 rounded-full bg-white flex items-center justify-center"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12h14"/></svg></button><span class="text-[12px] font-extrabold min-w-[34px] text-center">{{ i.qty }}</span><button onClick="{{ i.onInc }}" class="w-6 h-6 rounded-full bg-[#16A34A] text-white flex items-center justify-center"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button></div>
+                    <span class="text-[14px] font-extrabold text-[#1A1A1A]" style="font-family:'Fraunces',serif">₹{{ i.total }}</span>
+                  </div>
+                </div>
+              </div>
+            </sc-for>
+            <div class="bg-white border border-[#E5E7EB] rounded-2xl p-3 flex items-center gap-2"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12 12 20l-8-8V4h8l8 8Z"/><circle cx="8.5" cy="8.5" r="1.5"/></svg><input value="{{ coupon }}" onInput="{{ onCoupon }}" placeholder="Coupon (try PRINT150)" class="flex-1 bg-transparent text-[12.5px] font-semibold text-[#1A1A1A] placeholder:text-[#C7C0B2]" style="outline:none"/><button onClick="{{ applyCoupon }}" class="text-[11px] font-bold text-[#16A34A] px-3 py-1.5 rounded-lg bg-[#DCFCE7]">Apply</button></div>
+            <div class="bg-white border border-[#E5E7EB] rounded-2xl p-4">
+              <div class="flex flex-col gap-2 text-[12.5px]">
+                <span class="flex justify-between"><span class="text-[#6B7280]">Subtotal</span><span class="font-bold text-[#1A1A1A]">₹{{ subtotal }}</span></span>
+                <span class="flex justify-between"><span class="text-[#6B7280]">GST (18%)</span><span class="font-bold text-[#1A1A1A]">₹{{ gst }}</span></span>
+                <span class="flex justify-between"><span class="text-[#6B7280]">Delivery</span><span class="font-bold text-[#1A1A1A]">{{ deliveryLabel }}</span></span>
+                <sc-if value="{{ couponOk }}"><span class="flex justify-between"><span class="text-[#6B7280]">Coupon PRINT150</span><span class="font-bold text-[#16A34A]">– ₹150</span></span></sc-if>
+              </div>
+              <div class="border-t border-[#F3F4F6] mt-3 pt-3 flex justify-between items-center"><span class="text-[13px] font-bold text-[#1A1A1A]">Total</span><span class="text-[19px] font-extrabold text-[#1A1A1A]" style="font-family:'Fraunces',serif">₹{{ grandTotal }}</span></div>
+            </div>
+            <button onClick="{{ toCheckout }}" class="mt-1 w-full h-13 py-3.5 rounded-full bg-[#16A34A] text-white text-[14px] font-extrabold flex items-center justify-center gap-2 shadow-[0_10px_24px_-8px_rgba(22,163,74,.6)]">Proceed to Checkout · ₹{{ grandTotal }}<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+          </div>
+          </sc-if>
+        </div>
+        </sc-if>
+        <sc-if value="{{ isProfile }}">
+        <div class="pb-28 pe-fade px-5">
+          <h1 class="text-[24px] font-semibold text-[#1A1A1A] pt-4" style="font-family:'Fraunces',serif">Profile</h1>
+          <div class="mt-4 bg-gradient-to-br from-[#166534] to-[#16A34A] text-white rounded-[22px] p-4 flex items-center gap-3">
+            <span class="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center text-[20px] font-bold" style="font-family:'Fraunces',serif">Z</span>
+            <div class="flex-1"><h3 class="text-[16px] font-bold">Zeni Chauhan</h3><p class="text-[11.5px] text-white/80">+91 98765 43210 · Ahmedabad</p></div>
+            <span class="text-[9px] font-black bg-white/20 px-2 py-1 rounded-full">GOLD</span>
+          </div>
+          <div class="mt-4 bg-white border border-[#E5E7EB] rounded-[20px] overflow-hidden">
+            <button onClick="{{ goOrders }}" class="w-full flex items-center gap-3 p-4 border-b border-[#F3F4F6] text-left"><span class="w-9 h-9 rounded-xl bg-[#DCFCE7] text-[#16A34A] flex items-center justify-center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 4H6v18h12V4h-3"/></svg></span><span class="flex-1 text-[13.5px] font-bold text-[#1A1A1A]">My orders</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+            <button onClick="{{ toastSoon }}" class="w-full flex items-center gap-3 p-4 border-b border-[#F3F4F6] text-left"><span class="w-9 h-9 rounded-xl bg-[#DBEAFE] text-[#1D4ED8] flex items-center justify-center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span><span class="flex-1 text-[13.5px] font-bold text-[#1A1A1A]">Saved addresses</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+            <button onClick="{{ toastSoon }}" class="w-full flex items-center gap-3 p-4 border-b border-[#F3F4F6] text-left"><span class="w-9 h-9 rounded-xl bg-[#FEF3C7] text-[#B45309] flex items-center justify-center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span><span class="flex-1 text-[13.5px] font-bold text-[#1A1A1A]">Payment methods</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+            <button onClick="{{ toastSoon }}" class="w-full flex items-center gap-3 p-4 text-left"><span class="w-9 h-9 rounded-xl bg-[#F3F4F6] text-[#374151] flex items-center justify-center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg></span><span class="flex-1 text-[13.5px] font-bold text-[#1A1A1A]">Help &amp; support</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+          </div>
+        </div>
+        </sc-if>
+
+      </div>
+      </sc-if>
+
+      <!-- CART BAR -->
+      <sc-if value="{{ showCartBar }}">
+      <button onClick="{{ goCart }}" class="absolute left-3 right-3 bottom-[76px] z-30 pe-fade">
+        <div class="bg-[#16A34A] text-white rounded-2xl pl-2.5 pr-4 py-2.5 flex items-center justify-between shadow-[0_12px_28px_-8px_rgba(22,163,74,.6)] active:scale-[.98] transition">
+          <span class="flex items-center gap-2.5 min-w-0">
+            <span class="relative w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center flex-none"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="18" cy="21" r="1"/><path d="M3 3h2l2.4 12.4a1 1 0 0 0 1 .6h9.7a1 1 0 0 0 1-.8L21 7H6"/></svg><span class="absolute -top-1 -right-1 w-4 h-4 bg-white text-[#16A34A] rounded-full text-[8.5px] font-black flex items-center justify-center">{{ cartCount }}</span></span>
+            <span class="min-w-0 leading-tight text-left"><span class="text-[12px] font-bold block">{{ cartCount }} item(s) added</span><span class="text-[10px] text-white/80 font-semibold block">{{ cartTotal }} · excl. taxes</span></span>
+          </span>
+          <span class="flex items-center gap-1 text-[13px] font-extrabold flex-none">View Cart<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </div>
+      </button>
+      </sc-if>
+
+      <sc-if value="{{ isTab }}">
+      <!-- BOTTOM NAV -->
+      <div class="absolute bottom-0 inset-x-0 h-[68px] bg-white border-t border-[#EFECE6] px-3 pt-1.5 flex items-start justify-between z-30">
+        <button onClick="{{ goHome }}" class="flex-1 flex flex-col items-center gap-1 pt-1.5 active:scale-95 transition" style="color: {{ homeColor }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg><span class="text-[9.5px] font-bold">Home</span></button>
+        <button onClick="{{ goExplore }}" class="flex-1 flex flex-col items-center gap-1 pt-1.5 active:scale-95 transition" style="color: {{ exploreColor }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span class="text-[9.5px] font-bold">Explore</span></button>
+        <button onClick="{{ goOrders }}" class="flex-1 flex flex-col items-center gap-1 pt-1.5 active:scale-95 transition" style="color: {{ ordersColor }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 4H6v18h12V4h-3"/></svg><span class="text-[9.5px] font-bold">Orders</span></button>
+        <button onClick="{{ goCart }}" class="flex-1 flex flex-col items-center gap-1 pt-1.5 active:scale-95 transition relative" style="color: {{ cartColor }}"><span class="relative"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="18" cy="21" r="1"/><path d="M3 3h2l2.4 12.4a1 1 0 0 0 1 .6h9.7a1 1 0 0 0 1-.8L21 7H6"/></svg><sc-if value="{{ hasCart }}"><span class="absolute -top-1.5 -right-2 min-w-4 h-4 px-1 bg-[#D9383A] text-white rounded-full text-[8px] font-black flex items-center justify-center">{{ cartCount }}</span></sc-if></span><span class="text-[9.5px] font-bold">Cart</span></button>
+        <button onClick="{{ goProfile }}" class="flex-1 flex flex-col items-center gap-1 pt-1.5 active:scale-95 transition" style="color: {{ profileColor }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span class="text-[9.5px] font-bold">Profile</span></button>
+      </div>
+
+      </sc-if>
+
+      <!-- PRODUCT DETAIL (editorial accordion) -->
+      <sc-if value="{{ isProduct }}">
+      <div class="flex-1 min-h-0 flex flex-col bg-[#FCFAF7]">
+        <div class="flex-1 min-h-0 overflow-y-auto noscroll pb-4">
+          <div class="relative">
+            <div class="h-[210px] bg-[#F3F4F6] relative"><image-slot id="pe-detail-hero" src="{{ heroSrc }}" shape="rect" placeholder="Product photo"></image-slot>
+              <button onClick="{{ backTab }}" class="absolute top-3 left-3 w-10 h-10 rounded-full bg-white/90 backdrop-blur flex items-center justify-center shadow"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+              <button onClick="{{ bookmark }}" class="absolute top-3 right-3 w-10 h-10 rounded-full bg-white/90 backdrop-blur flex items-center justify-center shadow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2Z"/></svg></button>
+            </div>
+            <div class="relative -mt-9 mx-4 bg-white rounded-[22px] border border-[#E5E7EB] shadow-[0_12px_34px_-14px_rgba(0,0,0,.25)] p-4">
+              <div class="flex items-center gap-2"><span class="text-[9px] font-black uppercase tracking-[.12em] text-[#16A34A] bg-[#DCFCE7] px-2 py-0.5 rounded">{{ prodCat }}</span><span class="text-[#166534] text-[10px] font-black flex items-center gap-0.5">{{ prodRating }}<svg width="9" height="9" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1L12 2Z"/></svg> · Bestseller</span></div>
+              <h1 class="text-[22px] font-semibold text-[#1A1A1A] mt-2 leading-tight" style="font-family:'Fraunces',serif">{{ prodName }}</h1>
+              <p class="text-[12px] text-[#6B7280] mt-1.5 leading-relaxed">{{ prodBlurb }}</p>
+              <div class="flex items-baseline gap-1.5 mt-2.5"><span class="text-[11px] text-[#9CA3AF] font-semibold">starting</span><span class="text-[20px] font-extrabold text-[#1A1A1A]" style="font-family:'Fraunces',serif">{{ unitPriceLabel }}</span><span class="text-[11px] text-[#9CA3AF] font-semibold">/ pc</span></div>
+            </div>
+          </div>
+          <div class="px-4 mt-5">
+            <span class="text-[11px] font-black uppercase tracking-[.14em] text-[#9CA3AF]">Build your order</span>
+            <div class="mt-3 flex flex-col gap-2.5">
+              <sc-for list="{{ steps }}" as="st" hint-placeholder-count="3">
+                <div class="rounded-[18px] overflow-hidden transition" style="{{ st.wrapStyle }}">
+                  <button onClick="{{ st.onToggle }}" class="w-full flex items-center gap-3 p-3.5 text-left"><span class="w-7 h-7 rounded-full flex items-center justify-center text-[12px] font-bold flex-none" style="{{ st.numStyle }}">{{ st.n }}</span><span class="flex-1 min-w-0"><span class="block text-[13.5px] font-bold text-[#1A1A1A]">{{ st.title }}</span><span class="block text-[10.5px] text-[#9CA3AF] font-semibold truncate">{{ st.summary }}</span></span><span style="{{ st.chevStyle }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></button>
+                  <sc-if value="{{ st.open }}"><div class="px-3.5 pb-4">
+                    <sc-for list="{{ st.sections }}" as="sec" hint-placeholder-count="3">
+                      <sc-if value="{{ sec.isChips }}"><div class="mt-2"><span class="text-[11.5px] font-bold text-[#374151]">{{ sec.label }}</span><div class="flex flex-wrap gap-2 mt-2"><sc-for list="{{ sec.opts }}" as="o" hint-placeholder-count="3"><button onClick="{{ o.onSelect }}" class="h-8 px-3 rounded-lg text-[11.5px] font-bold border transition" style="{{ o.style }}">{{ o.label }}</button></sc-for></div></div></sc-if>
+                      <sc-if value="{{ sec.isToggle }}"><button onClick="{{ sec.onToggle }}" class="mt-3 w-full flex items-center justify-between"><span class="text-left"><span class="block text-[12px] font-bold text-[#1A1A1A]">{{ sec.label }}</span><span class="block text-[10px] text-[#9CA3AF]">{{ sec.desc }}</span></span><span class="w-[42px] h-[24px] rounded-full relative flex-none transition" style="{{ sec.tstyle }}"><span class="absolute top-[2px] w-[20px] h-[20px] rounded-full bg-white shadow transition" style="{{ sec.kstyle }}"></span></span></button></sc-if>
+                    </sc-for>
+                  </div></sc-if>
+                </div>
+              </sc-for>
+              <div class="rounded-[18px] overflow-hidden" style="{{ step4Wrap }}">
+                <button onClick="{{ toggle4 }}" class="w-full flex items-center gap-3 p-3.5 text-left"><span class="w-7 h-7 rounded-full flex items-center justify-center text-[12px] font-bold flex-none" style="{{ num4 }}">4</span><span class="flex-1 min-w-0"><span class="block text-[13.5px] font-bold text-[#1A1A1A]">Quantity</span><span class="block text-[10.5px] text-[#9CA3AF] font-semibold">{{ qtyLabel }} pcs · {{ orderTotalLabel }}</span></span><span style="{{ chev4 }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></button>
+                <sc-if value="{{ open4 }}"><div class="px-3.5 pb-4">
+                  <div class="grid grid-cols-3 gap-2 mt-1"><sc-for list="{{ tiers }}" as="t" hint-placeholder-count="3"><button onClick="{{ t.onSelect }}" class="relative rounded-xl border-2 p-2.5 text-left transition" style="{{ t.style }}"><sc-if value="{{ t.save }}"><span class="absolute -top-2 left-1/2 -translate-x-1/2 bg-[#D9383A] text-white text-[7.5px] font-black px-1.5 py-0.5 rounded-full whitespace-nowrap">{{ t.save }}</span></sc-if><span class="block text-[15px] font-extrabold text-[#1A1A1A]">{{ t.qtyLabel }}</span><span class="block text-[8px] text-[#9CA3AF] font-bold">pcs</span><span class="block text-[11px] font-extrabold text-[#16A34A] mt-1">{{ t.price }}</span></button></sc-for></div>
+                  <div class="mt-3 flex items-center justify-between bg-[#F3F4F6] rounded-xl px-3 py-2"><span class="text-[11.5px] font-bold text-[#374151]">Custom quantity</span><span class="flex items-center gap-3"><button onClick="{{ decQty }}" class="w-8 h-8 rounded-full bg-white flex items-center justify-center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"><path d="M5 12h14"/></svg></button><span class="text-[14px] font-extrabold min-w-[54px] text-center">{{ qtyLabel }}</span><button onClick="{{ incQty }}" class="w-8 h-8 rounded-full bg-[#16A34A] text-white flex items-center justify-center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button></span></div>
+                </div></sc-if>
+              </div>
+              <div class="rounded-[18px] overflow-hidden" style="{{ step5Wrap }}">
+                <button onClick="{{ toggle5 }}" class="w-full flex items-center gap-3 p-3.5 text-left"><span class="w-7 h-7 rounded-full flex items-center justify-center text-[12px] font-bold flex-none" style="{{ num5 }}">5</span><span class="flex-1 min-w-0"><span class="block text-[13.5px] font-bold text-[#1A1A1A]">Upload artwork</span><span class="block text-[10.5px] font-semibold truncate" style="{{ fileHintStyle }}">{{ fileHint }}</span></span><span style="{{ chev5 }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></button>
+                <sc-if value="{{ open5 }}"><div class="px-3.5 pb-4">
+                  <sc-if value="{{ noFile }}"><label class="block rounded-xl border-2 border-dashed border-[#CBC3B2] p-5 text-center cursor-pointer"><input type="file" onChange="{{ onFile }}" accept=".pdf,.ai,.eps,.png,.jpg,.cdr" style="display:none"/><span class="inline-flex w-10 h-10 rounded-full bg-[#DCFCE7] text-[#16A34A] items-center justify-center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 13v8"/><path d="m8 17 4-4 4 4"/><path d="M20 16.6A5 5 0 0 0 18 7h-1.3A8 8 0 1 0 4 15"/></svg></span><span class="block text-[12.5px] font-bold text-[#1A1A1A] mt-1.5">Tap to upload</span><span class="block text-[10px] text-[#9CA3AF]">PDF, AI, EPS, PNG · up to 3GB</span></label><button onClick="{{ useSample }}" class="mt-2 w-full text-[11px] font-bold text-[#16A34A]">or attach sample artwork</button></sc-if>
+                  <sc-if value="{{ hasFile }}"><div class="rounded-xl border border-[#16A34A]/40 bg-[#F0FDF4] p-3"><div class="flex items-center gap-2.5"><span class="w-9 h-9 rounded-lg bg-[#16A34A] text-white flex items-center justify-center flex-none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6v20h12V8l-4-6Z"/><path d="M14 2v6h4"/></svg></span><span class="flex-1 min-w-0"><span class="block text-[12px] font-bold text-[#1A1A1A] truncate">{{ fileName }}</span><span class="block text-[10px] text-[#16A34A] font-bold">Pre-flight passed</span></span><label class="text-[10.5px] font-bold text-[#16A34A] cursor-pointer flex-none">Replace<input type="file" onChange="{{ onFile }}" style="display:none"/></label></div><div class="grid grid-cols-2 gap-x-3 gap-y-1.5 mt-3"><span class="flex items-center gap-1.5 text-[10px] font-semibold text-[#374151]"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>300 DPI</span><span class="flex items-center gap-1.5 text-[10px] font-semibold text-[#374151]"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>CMYK</span><span class="flex items-center gap-1.5 text-[10px] font-semibold text-[#374151]"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>3mm bleed</span><span class="flex items-center gap-1.5 text-[10px] font-semibold text-[#374151]"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Fonts outlined</span></div></div></sc-if>
+                </div></sc-if>
+              </div>
+            </div>
+          </div>
+          <div class="px-4 mt-5"><div class="rounded-[20px] bg-[#14402C] text-white p-4">
+            <span class="text-[12px] font-bold uppercase tracking-wider text-white/60">Order summary</span>
+            <div class="mt-3 flex flex-col gap-2 text-[12.5px]"><span class="flex justify-between"><span class="text-white/70">Unit price</span><span class="font-bold">{{ unitPriceLabel }} / pc</span></span><span class="flex justify-between"><span class="text-white/70">Quantity</span><span class="font-bold">{{ qtyLabel }} pcs</span></span><sc-if value="{{ hasDisc }}"><span class="flex justify-between"><span class="text-white/70">Bulk discount</span><span class="font-bold text-[#8EE7A8]">{{ discLabel }}</span></span></sc-if></div>
+            <div class="border-t border-white/15 mt-3 pt-3 flex justify-between items-center"><span class="text-[13px] font-bold">Total</span><span class="text-[22px] font-extrabold" style="font-family:'Fraunces',serif">{{ orderTotalLabel }}</span></div>
+          </div></div>
+        </div>
+        <div class="shrink-0 bg-white border-t border-[#E5E7EB] px-4 pt-3 pb-7">
+          <sc-if value="{{ noFile }}"><p class="text-[10px] text-[#D9383A] font-bold text-center mb-2">Upload artwork (step 5) to add to cart</p></sc-if>
+          <div class="flex items-center gap-2.5"><div class="flex-none"><span class="block text-[8px] font-bold text-[#9CA3AF] uppercase">Total</span><span class="text-[18px] font-extrabold text-[#1A1A1A]" style="font-family:'Fraunces',serif">{{ orderTotalLabel }}</span></div><button onClick="{{ addConfigured }}" class="flex-1 h-12 rounded-full bg-[#16A34A] text-white text-[13px] font-extrabold transition" style="{{ addBtnStyle }}">Add to Cart</button><button onClick="{{ buyNow }}" class="flex-1 h-12 rounded-full border-2 border-[#16A34A] text-[#16A34A] text-[13px] font-extrabold transition" style="{{ addBtnStyle }}">Buy Now</button></div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- CHECKOUT -->
+      <sc-if value="{{ isCheckout }}">
+      <div class="flex-1 min-h-0 flex flex-col bg-[#FCFAF7]">
+        <div class="h-[52px] shrink-0 px-4 flex items-center gap-3 border-b border-[#EFECE6] bg-[#FCFAF7]"><button onClick="{{ backCart }}" class="w-9 h-9 rounded-full bg-white border border-[#E5E7EB] flex items-center justify-center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button><h1 class="text-[17px] font-semibold text-[#1A1A1A]" style="font-family:'Fraunces',serif">Checkout</h1></div>
+        <div class="flex-1 min-h-0 overflow-y-auto noscroll px-5 py-4 flex flex-col gap-4">
+          <div class="bg-white border border-[#E5E7EB] rounded-[18px] p-4"><div class="flex items-center justify-between"><span class="text-[11px] font-black uppercase tracking-wider text-[#9CA3AF]">Deliver to</span><button onClick="{{ toastSoon }}" class="text-[11px] font-bold text-[#16A34A]">Change</button></div><p class="text-[14px] font-bold text-[#1A1A1A] mt-1.5">Zeni Chauhan · +91 98765 43210</p><p class="text-[12px] text-[#6B7280] mt-0.5 leading-snug">402, Iscon Elegance, SG Highway, {{ city }}, {{ region }} — 380015</p></div>
+          <div><span class="text-[13px] font-bold text-[#1A1A1A]">Delivery speed</span><div class="mt-2 flex flex-col gap-2"><sc-for list="{{ slots }}" as="sl" hint-placeholder-count="2"><button onClick="{{ sl.onSelect }}" class="w-full flex items-center justify-between rounded-2xl border-2 bg-white p-3.5 transition" style="{{ sl.style }}"><span class="text-left"><span class="block text-[13px] font-bold text-[#1A1A1A]">{{ sl.title }}</span><span class="block text-[10.5px] text-[#9CA3AF]">{{ sl.sub }}</span></span><span class="text-[13px] font-extrabold text-[#16A34A]">{{ sl.priceLabel }}</span></button></sc-for></div></div>
+          <div><span class="text-[13px] font-bold text-[#1A1A1A]">Payment method</span><div class="mt-2 flex flex-col gap-2"><sc-for list="{{ pays }}" as="pm" hint-placeholder-count="4"><button onClick="{{ pm.onSelect }}" class="w-full flex items-center gap-3 rounded-2xl border-2 bg-white p-3.5 transition" style="{{ pm.style }}"><span class="text-[18px]">{{ pm.icon }}</span><span class="flex-1 text-left text-[13px] font-bold text-[#1A1A1A]">{{ pm.label }}</span><span class="w-5 h-5 rounded-full border-2 flex items-center justify-center" style="{{ pm.ring }}"><sc-if value="{{ pm.on }}"><span class="w-2.5 h-2.5 rounded-full bg-[#16A34A]"></span></sc-if></span></button></sc-for></div></div>
+          <div class="bg-white border border-[#E5E7EB] rounded-[18px] p-4"><div class="flex flex-col gap-2 text-[12.5px]"><span class="flex justify-between"><span class="text-[#6B7280]">Subtotal</span><span class="font-bold text-[#1A1A1A]">₹{{ subtotal }}</span></span><span class="flex justify-between"><span class="text-[#6B7280]">GST (18%)</span><span class="font-bold text-[#1A1A1A]">₹{{ gst }}</span></span><span class="flex justify-between"><span class="text-[#6B7280]">Delivery</span><span class="font-bold text-[#1A1A1A]">{{ deliveryLabel }}</span></span><sc-if value="{{ couponOk }}"><span class="flex justify-between"><span class="text-[#6B7280]">Coupon</span><span class="font-bold text-[#16A34A]">– ₹150</span></span></sc-if></div><div class="border-t border-[#F3F4F6] mt-3 pt-3 flex justify-between items-center"><span class="text-[13px] font-bold text-[#1A1A1A]">To pay</span><span class="text-[19px] font-extrabold text-[#1A1A1A]" style="font-family:'Fraunces',serif">{{ grandTotalLabel }}</span></div></div>
+        </div>
+        <div class="shrink-0 bg-white border-t border-[#E5E7EB] px-4 pt-3 pb-7">
+          <div class="relative h-14 rounded-full bg-[#DCFCE7] overflow-hidden select-none">
+            <span class="absolute inset-0 flex items-center justify-center text-[13px] font-extrabold text-[#166534] pointer-events-none">Slide to pay {{ grandTotalLabel }}</span>
+            <span class="absolute top-1 left-1 w-12 h-12 rounded-full bg-[#16A34A] text-white flex items-center justify-center pointer-events-none z-10" style="{{ knobStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+            <input type="range" min="0" max="100" value="{{ slideVal }}" onInput="{{ onSlide }}" onChange="{{ onSlideEnd }}" class="pe-slider absolute inset-0 w-full h-full opacity-0 z-20" />
+          </div>
+          <p class="text-center text-[10px] text-[#9CA3AF] mt-2">100% secure · Razorpay UPI</p>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- LIVE TRACKING -->
+      <sc-if value="{{ isTracking }}">
+      <div class="flex-1 min-h-0 flex flex-col bg-[#FCFAF7]">
+        <div class="h-[52px] shrink-0 px-4 flex items-center gap-3 border-b border-[#EFECE6] bg-[#FCFAF7]"><button onClick="{{ goOrders }}" class="w-9 h-9 rounded-full bg-white border border-[#E5E7EB] flex items-center justify-center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button><h1 class="text-[17px] font-semibold text-[#1A1A1A]" style="font-family:'Fraunces',serif">Track order</h1></div>
+        <div class="flex-1 min-h-0 overflow-y-auto noscroll px-5 py-4 pb-8">
+          <div class="bg-gradient-to-br from-[#166534] to-[#16A34A] text-white rounded-[22px] p-5">
+            <div class="flex items-center justify-between"><span class="text-[10px] font-bold uppercase tracking-wider text-white/70">Order #{{ trackId }}</span><span class="text-[10px] font-bold bg-white/20 px-2 py-1 rounded-full flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#FDE047]" style="animation:pe-pop 1s ease infinite"></span>Live</span></div>
+            <h2 class="text-[22px] font-semibold mt-2 leading-tight" style="font-family:'Fraunces',serif">{{ trackStageTitle }}</h2>
+            <p class="text-[12px] text-white/80 mt-1">{{ trackStageDesc }}</p>
+            <div class="mt-3.5 h-1.5 bg-white/25 rounded-full overflow-hidden"><span class="block h-full bg-white rounded-full transition-all duration-700" style="{{ trackBar }}"></span></div>
+            <p class="text-[11px] text-white/90 mt-2 font-semibold">{{ trackEta }}</p>
+          </div>
+          <sc-if value="{{ proofVisible }}"><div class="mt-4 bg-white border border-[#E5E7EB] rounded-[18px] p-3 pe-fade"><div class="flex items-center gap-2 mb-2"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg><span class="text-[12px] font-bold text-[#1A1A1A]">Print proof approved</span></div><div class="h-[130px] rounded-xl overflow-hidden bg-[#F3F4F6] relative"><image-slot id="pe-proof" src="{{ proofSrc }}" shape="rect" placeholder="Proof"></image-slot></div></div></sc-if>
+          <div class="mt-4 bg-white border border-[#E5E7EB] rounded-[18px] p-5">
+            <sc-for list="{{ timeline }}" as="tl" hint-placeholder-count="6">
+              <div class="flex gap-3.5">
+                <div class="flex flex-col items-center flex-none"><span class="w-8 h-8 rounded-full flex items-center justify-center" style="{{ tl.dotStyle }}"><sc-if value="{{ tl.done }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></sc-if></span><sc-if value="{{ tl.line }}"><span class="w-0.5 flex-1 my-1 rounded-full" style="{{ tl.lineStyle }}"></span></sc-if></div>
+                <div class="pb-5"><span class="block text-[13px] font-bold" style="{{ tl.titleStyle }}">{{ tl.title }}</span><span class="block text-[10.5px] text-[#9CA3AF] mt-0.5 leading-snug">{{ tl.desc }}</span></div>
+              </div>
+            </sc-for>
+          </div>
+          <div class="mt-4 bg-white border border-[#E5E7EB] rounded-[18px] p-4 flex items-center gap-3"><span class="w-11 h-11 rounded-full bg-[#DCFCE7] text-[#16A34A] flex items-center justify-center flex-none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="6" rx="1"/><path d="M6 14H4a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="7" rx="1"/></svg></span><div class="flex-1"><span class="block text-[13px] font-bold text-[#1A1A1A]">Sunrise Print Partners</span><span class="block text-[10.5px] text-[#9CA3AF]">Verified · {{ city }} hub</span></div><button onClick="{{ toastSoon }}" class="w-9 h-9 rounded-full bg-[#16A34A] text-white flex items-center justify-center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 10.5a6 6 0 0 1-1.5.2 6 6 0 0 1-6-6 6 6 0 0 1 .2-1.5L5 3 3 5a16 16 0 0 0 16 16l2-2-3.2-1.2Z"/></svg></button></div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- HOME INDICATOR -->
+      <div class="absolute bottom-1.5 inset-x-0 flex justify-center pointer-events-none z-40"><div class="w-[120px] h-[5px] bg-[#1A1A1A]/20 rounded-full"></div></div>
+
+      <!-- TOAST -->
+      <sc-if value="{{ toast }}">
+      <div class="absolute top-12 inset-x-4 z-50 pe-toast">
+        <div class="bg-white/95 backdrop-blur-md border border-[#E5E7EB] shadow-[0_10px_30px_-8px_rgba(0,0,0,.25)] rounded-2xl p-3 flex items-start gap-3">
+          <span class="bg-[#DCFCE7] text-[#16A34A] p-2 rounded-xl flex-none"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l1.9 4.6L18.5 9.5 13.9 11.4 12 16l-1.9-4.6L5.5 9.5l4.6-1.9L12 3Z"/></svg></span>
+          <span class="flex-1 min-w-0"><span class="flex justify-between items-center"><span class="text-[12px] font-bold text-[#1A1A1A]">PrintEve</span><span class="text-[10px] text-[#9CA3AF]">now</span></span><span class="block text-[12px] text-[#4B5563] mt-0.5 font-medium leading-snug">{{ toast }}</span></span>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- CITY BOTTOM SHEET -->
+      <sc-if value="{{ citySheet }}">
+      <div class="absolute inset-0 z-50 flex items-end">
+        <button onClick="{{ closeCity }}" class="absolute inset-0 bg-black/50 pe-fade"></button>
+        <div class="relative w-full bg-[#FCFAF7] rounded-t-[28px] p-5 pb-8 pe-sheet">
+          <div class="w-10 h-1.5 bg-[#E5E7EB] rounded-full mx-auto mb-4"></div>
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-[18px] font-semibold text-[#1A1A1A]" style="font-family:'Fraunces',serif">Select your city</h2>
+            <button onClick="{{ closeCity }}" class="w-8 h-8 rounded-full bg-[#F3F4F6] text-[#4B5563] flex items-center justify-center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+          </div>
+          <div class="flex flex-col gap-2">
+            <sc-for list="{{ cities }}" as="c" hint-placeholder-count="4">
+              <button onClick="{{ c.onSelect }}" class="w-full p-3.5 rounded-2xl border border-[#E5E7EB] bg-white text-left flex items-center gap-3 active:bg-[#F3F4F6] transition">
+                <span class="w-9 h-9 rounded-xl bg-[#DCFCE7] text-[#16A34A] flex items-center justify-center flex-none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                <span class="leading-tight"><span class="block text-[14px] font-bold text-[#1A1A1A]">{{ c.name }}</span><span class="block text-[11px] text-[#9CA3AF] font-semibold">{{ c.region }}</span></span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;440&quot;,&quot;height&quot;:&quot;920&quot;},&quot;autoRotateHero&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Home&quot;},&quot;promoStrip&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Home&quot;},&quot;showHowItWorks&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Home&quot;}}">
+class Component extends DCLogic {
+  state = {
+    screen: 'home', tab: 'home', city: 'Ahmedabad', region: 'Gujarat', citySheet: false, hero: 0,
+    xcat: 'All', cart: [], selId: null, cfg: {}, openStep: 1,
+    coupon: '', couponOk: false, slot: 0, pay: 'gpay', slideVal: 0,
+    orders: [{ id: '4471', name: 'Rounded Business Cards', slot: 'pe-prod-cards', qty: 250, total: 1680, stage: 4, placed: '18 Jul' }],
+    currentOrder: null, toast: null
+  };
+
+  componentDidMount() {
+    if (this.props.autoRotateHero ?? true) this.timer = setInterval(() => { if (this.state.screen === 'home') this.setState(s => ({ hero: (s.hero + 1) % 3 })); }, 4200);
+  }
+  componentWillUnmount() { clearInterval(this.timer); clearInterval(this.trackTimer); clearTimeout(this._t); }
+
+  showToast(msg) { clearTimeout(this._t); this.setState({ toast: null }, () => this.setState({ toast: msg })); this._t = setTimeout(() => this.setState({ toast: null }), 2400); }
+
+  get GROUPS() {
+    return {
+      card: { sizes: ['3.5x2 in', '2.5x2.5 in', '3x1 in Mini'], stocks: ['Art card', 'Matte card', 'Linen', 'Kraft'], gsmLabel: 'Paper weight (GSM)', gsms: ['250', '300', '350', '400'] },
+      sticker: { sizes: ['2x2 in', '3x3 in', '4x4 in', 'Custom'], stocks: ['White vinyl', 'Clear vinyl', 'Holographic', 'Kraft'], gsmLabel: 'Material', gsms: ['Matte', 'Gloss', 'Waterproof'] },
+      fold: { sizes: ['A4 to DL', 'A5', 'A6', 'Legal'], stocks: ['Art paper', 'Gloss art', 'Matte art', 'Recycled'], gsmLabel: 'Paper weight (GSM)', gsms: ['130', '170', '250'] },
+      flyer: { sizes: ['A4', 'A5', 'A6', 'DL'], stocks: ['Gloss art', 'Matte art', 'Recycled'], gsmLabel: 'Paper weight (GSM)', gsms: ['130', '170', '250'] },
+      banner: { sizes: ['2x4 ft', '3x6 ft', '4x8 ft', 'Custom'], stocks: ['Flex vinyl', 'Star flex', 'Fabric', 'Backlit'], gsmLabel: 'Substrate', gsms: ['440 GSM', '510 GSM'] },
+      box: { sizes: ['Small', 'Medium', 'Large', 'Custom'], stocks: ['Corrugated', 'Kraft board', 'Rigid'], gsmLabel: 'Board', gsms: ['3-ply', '5-ply'] }
+    };
+  }
+  get CATALOG() {
+    return [
+      { id: 'trifold', name: 'Tri-Fold Brochures', cat: 'Flyers', group: 'fold', unit: 8, rating: 4.9, eta: '48-hr', save: 'SAVE 20%', slot: 'pe-prod-trifold', min: 100, blurb: '170 GSM tri-fold with crease-safe folding and vivid CMYK colour.' },
+      { id: 'card', name: 'Rounded Business Cards', cat: 'Cards', group: 'card', unit: 6, rating: 4.8, eta: '24-hr', save: 'SAVE 15%', slot: 'pe-prod-cards', min: 100, blurb: 'Premium 350 GSM cards with soft rounded corners and matte lamination.' },
+      { id: 'sticker', name: 'Die-Cut Stickers', cat: 'Stickers', group: 'sticker', unit: 5, rating: 4.9, eta: '2-3 days', save: 'SAVE 15%', slot: 'pe-prod-sticker', min: 50, blurb: 'Waterproof vinyl, custom-cut to your artwork. Scratch and UV resistant.' },
+      { id: 'banner', name: 'Vinyl Banners', cat: 'Banners', group: 'banner', unit: 120, rating: 4.7, eta: '3 days', save: 'SAVE 10%', slot: 'pe-prod-banner', min: 1, blurb: 'Heavy 440 GSM flex, outdoor-grade, reinforced hems and eyelets.' },
+      { id: 'flyer', name: 'Gloss Flyers A5', cat: 'Flyers', group: 'flyer', unit: 3, rating: 4.7, eta: '2-4 days', save: 'SAVE 12%', slot: 'pe-prod-flyer', min: 100, blurb: 'Double-sided 170 GSM gloss with high-saturation colour that pops.' },
+      { id: 'box', name: 'Mailer Boxes', cat: 'Packaging', group: 'box', unit: 18, rating: 4.6, eta: '4 days', save: 'SAVE 18%', slot: 'pe-prod-box', min: 50, blurb: 'Corrugated mailer boxes, custom printed inside and out.' }
+    ];
+  }
+
+  go(screen) { this.setState({ screen }); }
+  openProduct(id) {
+    const p = this.CATALOG.find(x => x.id === id); if (!p) return;
+    const g = this.GROUPS[p.group];
+    const cfg = { size: g.sizes[0], stock: g.stocks[0], gsm: g.gsms[Math.min(1, g.gsms.length - 1)], finish: 'Matte', sides: 'Single', lam: 'None', color: 'CMYK', qty: p.min, corner: 'Rounded', ply: 'Single', foil: false, emboss: false, cut: 'Die-cut', adhesive: 'Permanent', fold: 'Tri-fold', crease: true, eyelets: true, fileName: '' };
+    this.setState({ screen: 'product', selId: id, cfg, openStep: 1 });
+  }
+  setCfg(k, v) { this.setState(st => ({ cfg: { ...st.cfg, [k]: v } })); }
+  cartQty(key, d) { this.setState(st => ({ cart: st.cart.map(i => i.key === key ? { ...i, qty: Math.max(1, i.qty + d), total: Math.round(i.unit * Math.max(1, i.qty + d)) } : i) })); }
+  cartRemove(key) { this.setState(st => ({ cart: st.cart.filter(i => i.key !== key) })); this.showToast('Removed from cart'); }
+  placeOrder() {
+    const st0 = this.state;
+    const subtotal = st0.cart.reduce((a, i) => a + i.total, 0);
+    const fee = st0.slot === 1 ? 120 : 0;
+    const grand = Math.round(subtotal * 1.18) + fee - (st0.couponOk ? 150 : 0);
+    const first = st0.cart[0] || { name: 'Print order', slot: 'pe-prod-cards' };
+    const id = String(Math.floor(1000 + Math.random() * 9000));
+    const order = { id, name: first.name + (st0.cart.length > 1 ? ' +' + (st0.cart.length - 1) + ' more' : ''), slot: first.slot, qty: st0.cart.reduce((a, i) => a + i.qty, 0), total: grand, stage: 0, placed: 'Just now' };
+    clearInterval(this.trackTimer);
+    this.setState(st => ({ orders: [order, ...st.orders], currentOrder: id, cart: [], screen: 'tracking', slideVal: 0, couponOk: false, coupon: '' }));
+    this.showToast('Payment successful — order placed!');
+    this.trackTimer = setInterval(() => {
+      this.setState(st => {
+        const os = st.orders.map(o => (o.id === id && o.stage < 5) ? { ...o, stage: o.stage + 1 } : o);
+        if (os.every(o => o.id !== id || o.stage >= 5)) clearInterval(this.trackTimer);
+        return { orders: os };
+      });
+    }, 3500);
+  }
+
+  renderVals() {
+    const s = this.state;
+    const TABS = ['home', 'explore', 'orders', 'cart', 'profile'];
+    const isTab = TABS.includes(s.screen);
+    const goTab = sc => () => this.setState({ screen: sc, tab: sc });
+    const tabColor = sc => (s.tab === sc ? '#16A34A' : '#94A3B8');
+    const dot = i => 'height:6px;border-radius:9999px;transition:all .3s;border:0;padding:0;cursor:pointer;' + (i === s.hero ? 'width:22px;background:#16A34A' : 'width:6px;background:#D1D5DB');
+    const cities = [['Ahmedabad', 'Gujarat'], ['Surat', 'Gujarat'], ['Vadodara', 'Gujarat'], ['Rajkot', 'Gujarat'], ['Bhavnagar', 'Gujarat']]
+      .map(([name, region]) => ({ name, region, onSelect: () => { this.setState({ city: name, region, citySheet: false }); this.showToast('Delivering to ' + name); } }));
+
+    const catalog = this.CATALOG;
+    const fromP = p => Math.round(p.unit * p.min);
+    const SEED = { trifold: 'peBrochure', card: 'peCard', sticker: 'peSticker', flyer: 'peFlyer', banner: 'peBanner', box: 'peBox' };
+    const imgId = id => 'https://picsum.photos/seed/' + (SEED[id] || 'peCard') + '/700/500';
+    const SLOTID = { 'pe-prod-trifold': 'trifold', 'pe-prod-cards': 'card', 'pe-prod-sticker': 'sticker', 'pe-prod-flyer': 'flyer', 'pe-prod-banner': 'banner', 'pe-prod-box': 'box' };
+    const imgSlot = sl => imgId(SLOTID[sl] || 'card');
+    // explore
+    const xmap = { All: null, Cards: 'Cards', Stickers: 'Stickers', Banners: 'Banners', Flyers: 'Flyers', Packaging: 'Packaging' };
+    const xchips = ['All', 'Cards', 'Stickers', 'Banners', 'Flyers', 'Packaging'].map(label => ({ label, onSelect: () => this.setState({ xcat: label }),
+      style: s.xcat === label ? 'background:#16A34A;color:#fff;border-color:#16A34A' : 'background:#fff;color:#374151;border-color:#E5E7EB' }));
+    const xf = xmap[s.xcat];
+    const exploreItems = catalog.filter(p => !xf || p.cat === xf).map(p => ({ ...p, from: fromP(p), img: imgId(p.id), onOpen: () => this.openProduct(p.id) }));
+
+    // product configurator
+    const prod = catalog.find(p => p.id === s.selId) || catalog[0];
+    const g = this.GROUPS[prod.group];
+    const cfg = s.cfg || {};
+    const ACT = 'background:#DCFCE7;color:#166534;border-color:#16A34A';
+    const IDL = 'background:#fff;color:#374151;border-color:#E5E7EB';
+    const chips = (key, label, list) => ({ isChips: true, key, label, selected: cfg[key], opts: list.map(v => ({ label: v, style: cfg[key] === v ? ACT : IDL, onSelect: () => this.setCfg(key, v) })) });
+    const toggle = (key, label, desc) => ({ isToggle: true, key, label, desc, on: !!cfg[key], onToggle: () => this.setCfg(key, !cfg[key]), tstyle: cfg[key] ? 'background:#16A34A' : 'background:#D8D2C4', kstyle: cfg[key] ? 'transform:translateX(20px)' : 'transform:translateX(2px)' });
+    const sections = [];
+    sections.push(chips('size', 'Size / dimensions', g.sizes));
+    sections.push(chips('stock', 'Paper stock', g.stocks));
+    sections.push(chips('gsm', g.gsmLabel, g.gsms));
+    if (['card', 'fold', 'flyer', 'box'].includes(prod.group)) sections.push(chips('finish', 'Finish / coating', ['Uncoated', 'Matte', 'Gloss', 'Satin', 'Soft-touch', 'UV Gloss']));
+    if (['card', 'fold', 'flyer'].includes(prod.group)) sections.push(chips('sides', 'Printed sides', ['Single', 'Double']));
+    if (prod.group === 'card') { sections.push(chips('corner', 'Corners', ['Square', 'Rounded'])); sections.push(chips('ply', 'Card layers', ['Single', 'Duplex', 'Triplex'])); sections.push(toggle('foil', 'Foil stamping', 'Gold / silver metallic accent')); sections.push(toggle('emboss', 'Emboss / deboss', 'Raised or recessed detail')); }
+    if (prod.group === 'sticker') { sections.push(chips('cut', 'Cut style', ['Die-cut', 'Kiss-cut', 'Sheet', 'Roll'])); sections.push(chips('adhesive', 'Adhesive', ['Removable', 'Permanent', 'High-tack'])); }
+    if (prod.group === 'fold') { sections.push(chips('fold', 'Fold type', ['Bi-fold', 'Tri-fold', 'Z-fold', 'Gate-fold'])); sections.push(toggle('crease', 'Machine creasing', 'Prevents cracking on 150+ GSM')); }
+    if (prod.group === 'banner') sections.push(toggle('eyelets', 'Eyelets & hemming', 'Metal rings + reinforced edges'));
+    if (['card', 'fold', 'flyer'].includes(prod.group)) sections.push(chips('lam', 'Lamination', ['None', 'Matte', 'Gloss', 'Soft-touch']));
+    sections.push(chips('color', 'Colour mode', ['CMYK', 'CMYK + Pantone']));
+
+    const stepMeta = [[1, 'Size & stock', ['size', 'stock', 'gsm']], [2, 'Finish & colour', ['finish', 'sides', 'lam', 'color']], [3, 'Finishing touches', ['corner', 'ply', 'foil', 'emboss', 'cut', 'adhesive', 'fold', 'crease', 'eyelets']]];
+    const stepStyle = open => ({ wrapStyle: open ? 'border:1.5px solid #16A34A' : 'border:1px solid #E5E7EB', numStyle: open ? 'background:#16A34A;color:#fff' : 'background:#DCFCE7;color:#16A34A', chevStyle: (open ? 'transform:rotate(180deg);' : '') + 'transition:transform .2s;display:inline-flex' });
+    const steps = stepMeta.map(([n, title, keys]) => {
+      const secs = sections.filter(x => keys.includes(x.key));
+      const open = s.openStep === n;
+      const summary = secs.map(x => x.isChips ? x.selected : (x.on ? x.label : null)).filter(Boolean).join(' · ');
+      return { n, title, sections: secs, open, summary, onToggle: () => this.setState({ openStep: open ? 0 : n }), ...stepStyle(open) };
+    }).filter(st => st.sections.length > 0);
+
+    let unit = prod.unit;
+    const gi = g.gsms.indexOf(cfg.gsm); if (gi > 0) unit += gi * (prod.unit * 0.12 + 0.4);
+    unit += ({ Uncoated: 0, Matte: 0.4, Gloss: 0.6, Satin: 0.5, 'Soft-touch': 1.2, 'UV Gloss': 1.0 }[cfg.finish] || 0);
+    unit += ({ None: 0, Matte: 0.5, Gloss: 0.5, 'Soft-touch': 1.0 }[cfg.lam] || 0);
+    if (cfg.sides === 'Double') unit += prod.unit * 0.35;
+    if (cfg.color && cfg.color.indexOf('Pantone') >= 0) unit += 1.2;
+    if (cfg.foil) unit += 1.8; if (cfg.emboss) unit += 1.4;
+    if (cfg.ply === 'Duplex') unit += 1; if (cfg.ply === 'Triplex') unit += 2.2;
+    const unitPrice = Math.round(unit * 10) / 10;
+    const dsc = q => q >= prod.min * 10 ? 0.2 : q >= prod.min * 4 ? 0.08 : 0;
+    const qty = cfg.qty || prod.min;
+    const tiers = [prod.min, prod.min * 4, prod.min * 10].map(q => ({ qtyLabel: q.toLocaleString('en-IN'), price: '₹' + Math.round(unitPrice * q * (1 - dsc(q))).toLocaleString('en-IN'), save: dsc(q) ? 'Save ' + Math.round(dsc(q) * 100) + '%' : '', onSelect: () => this.setCfg('qty', q), style: qty === q ? 'border-color:#16A34A;background:#F0FDF4' : 'border-color:#E5E7EB;background:#fff' }));
+    const subA = unitPrice * qty; const dscAmt = Math.round(subA * dsc(qty)); const orderTotal = Math.round(subA - dscAmt);
+    const hasFile = !!cfg.fileName; const noFile = !hasFile; const canAdd = hasFile;
+    const s4 = s.openStep === 4, s5 = s.openStep === 5;
+
+    const addItem = (nav) => {
+      const specStr = [cfg.size, cfg.gsm + (g.gsmLabel.indexOf('GSM') >= 0 ? ' GSM' : ''), cfg.finish, (prod.group === 'fold' ? cfg.fold : (prod.group === 'sticker' ? cfg.cut : null))].filter(Boolean).join(' · ');
+      const item = { key: prod.id + '-' + Date.now(), id: prod.id, name: prod.name, slot: prod.slot, qty, unit: unitPrice, total: orderTotal, spec: specStr, file: cfg.fileName };
+      this.setState(st => ({ cart: [...st.cart, item], screen: nav, tab: nav === 'cart' ? 'cart' : st.tab }));
+      this.showToast(prod.name + ' x ' + qty + ' added to cart');
+    };
+
+    // cart
+    const cartItems = s.cart.map(i => ({ ...i, img: imgId(i.id), onInc: () => this.cartQty(i.key, i.qty >= 100 ? 25 : 1), onDec: () => this.cartQty(i.key, -(i.qty > 100 ? 25 : 1)), onRemove: () => this.cartRemove(i.key) }));
+    const subtotal = s.cart.reduce((a, i) => a + i.total, 0);
+    const gst = Math.round(subtotal * 0.18);
+    const fee = s.slot === 1 ? 120 : 0;
+    const disc = s.couponOk ? 150 : 0;
+    const grand = subtotal + gst + fee - disc;
+
+    // checkout
+    const slots = [['Standard', '3-4 days · included', 0], ['Express', '48 hours · priority press', 120]].map(([title, sub, price], i) => ({ title, sub, priceLabel: price ? '+₹' + price : 'FREE', onSelect: () => this.setState({ slot: i }), style: s.slot === i ? 'border-color:#16A34A;background:#F0FDF4' : 'border-color:#E5E7EB;background:#fff' }));
+    const pays = [['gpay', 'Google Pay', '🟢'], ['phonepe', 'PhonePe', '🟣'], ['paytm', 'Paytm', '🔵'], ['card', 'Credit / Debit card', '💳']].map(([id, label, icon]) => ({ label, icon, on: s.pay === id, onSelect: () => this.setState({ pay: id }), style: s.pay === id ? 'border-color:#16A34A;background:#F0FDF4' : 'border-color:#E5E7EB;background:#fff', ring: s.pay === id ? 'border-color:#16A34A' : 'border-color:#D1D5DB' }));
+
+    // orders + tracking
+    const STAGES = [['Order confirmed', 'Payment received, order queued'], ['Assigned to print partner', 'Sunrise Print Partners accepted the job'], ['In production', 'On the press — CMYK plates ready'], ['Quality checked', 'Digital proof approved, colours verified'], ['Dispatched', 'Out for delivery via BlueDart'], ['Delivered', 'Enjoy your premium prints!']];
+    const statusLabels = ['Confirmed', 'Assigned', 'In production', 'Quality check', 'Dispatched', 'Delivered'];
+    const stStyle = st => st === 5 ? 'background:#DCFCE7;color:#166534' : st >= 3 ? 'background:#DBEAFE;color:#1D4ED8' : 'background:#FEF3C7;color:#B45309';
+    const orderList = s.orders.map(o => ({ ...o, img: imgSlot(o.slot), statusLabel: statusLabels[o.stage], statusStyle: stStyle(o.stage), onOpen: () => this.setState({ currentOrder: o.id, screen: 'tracking' }) }));
+    const cur = s.orders.find(o => o.id === s.currentOrder) || s.orders[0];
+    const cstage = cur ? cur.stage : 0;
+    const timeline = STAGES.map(([title, desc], i) => {
+      const done = i < cstage, active = i === cstage;
+      return { title, desc, done, line: i < 5,
+        dotStyle: (done || active) ? 'background:#16A34A' : 'background:#E5E7EB',
+        lineStyle: i < cstage ? 'background:#16A34A' : 'background:#E5E7EB',
+        titleStyle: (done || active) ? 'color:#1A1A1A' : 'color:#9CA3AF' };
+    });
+    const etaTxt = cstage >= 5 ? 'Delivered — thank you!' : cstage >= 4 ? 'Arriving today by 7 PM' : 'Estimated delivery in ' + (4 - cstage) + '–' + (5 - cstage) + ' days';
+
+    return {
+      isTab, isHome: s.screen === 'home', isExplore: s.screen === 'explore', isOrders: s.screen === 'orders', isCart: s.screen === 'cart', isProfile: s.screen === 'profile',
+      isProduct: s.screen === 'product', isCheckout: s.screen === 'checkout', isTracking: s.screen === 'tracking',
+      city: s.city, region: s.region, citySheet: s.citySheet, cities,
+      openCity: () => this.setState({ citySheet: true }), closeCity: () => this.setState({ citySheet: false }),
+      heroTransform: 'translateX(-' + (s.hero * (100 / 3)) + '%)',
+      dot0: dot(0), dot1: dot(1), dot2: dot(2),
+      nextHero: () => this.setState(st => ({ hero: (st.hero + 1) % 3 })),
+      goHero0: () => this.setState({ hero: 0 }), goHero1: () => this.setState({ hero: 1 }), goHero2: () => this.setState({ hero: 2 }),
+      goHome: goTab('home'), goExplore: goTab('explore'), goOrders: goTab('orders'), goCart: goTab('cart'), goProfile: goTab('profile'),
+      homeColor: tabColor('home'), exploreColor: tabColor('explore'), ordersColor: tabColor('orders'), cartColor: tabColor('cart'), profileColor: tabColor('profile'),
+      addTrifold: () => this.openProduct('trifold'), addCards: () => this.openProduct('card'), addStickers: () => this.openProduct('sticker'), addFlyers: () => this.openProduct('flyer'),
+      hasCart: s.cart.length > 0, showCartBar: s.cart.length > 0 && isTab && s.screen !== 'cart',
+      cartCount: s.cart.length, cartTotal: '₹' + subtotal.toLocaleString('en-IN'),
+      toast: s.toast, promoStrip: this.props.promoStrip ?? true, howItWorks: this.props.showHowItWorks ?? true,
+      openBell: () => this.showToast('You\u2019re all caught up — no new alerts'),
+      // explore
+      xchips, exploreItems,
+      // product
+      heroSrc: 'https://picsum.photos/seed/pe-' + prod.id + '-hero/900/620', prodCat: prod.cat, prodName: prod.name, prodBlurb: prod.blurb, prodRating: prod.rating,
+      unitPriceLabel: '₹' + unitPrice, steps, tiers, qtyLabel: qty.toLocaleString('en-IN'), orderTotalLabel: '₹' + orderTotal.toLocaleString('en-IN'),
+      hasDisc: dscAmt > 0, discLabel: dscAmt ? '– ₹' + dscAmt.toLocaleString('en-IN') : '',
+      open4: s4, open5: s5, toggle4: () => this.setState({ openStep: s4 ? 0 : 4 }), toggle5: () => this.setState({ openStep: s5 ? 0 : 5 }),
+      step4Wrap: s4 ? 'border:1.5px solid #16A34A' : 'border:1px solid #E5E7EB', num4: s4 ? 'background:#16A34A;color:#fff' : 'background:#DCFCE7;color:#16A34A', chev4: (s4 ? 'transform:rotate(180deg);' : '') + 'transition:transform .2s;display:inline-flex',
+      step5Wrap: s5 ? 'border:1.5px solid #16A34A' : 'border:1px solid #E5E7EB', num5: s5 ? 'background:#16A34A;color:#fff' : 'background:#DCFCE7;color:#16A34A', chev5: (s5 ? 'transform:rotate(180deg);' : '') + 'transition:transform .2s;display:inline-flex',
+      incQty: () => this.setCfg('qty', qty + prod.min), decQty: () => this.setCfg('qty', Math.max(prod.min, qty - prod.min)),
+      noFile, hasFile, fileName: cfg.fileName || '', fileHint: hasFile ? cfg.fileName : 'Required — attach print-ready file', fileHintStyle: hasFile ? 'color:#16A34A' : 'color:#D9383A',
+      onFile: (e) => { const f = e.target.files && e.target.files[0]; this.setCfg('fileName', f ? f.name : 'my-artwork.pdf'); if (f) this.showToast('Uploaded ' + f.name); },
+      useSample: () => { this.setCfg('fileName', 'brand-artwork.pdf'); this.showToast('Sample artwork attached'); },
+      addBtnStyle: canAdd ? '' : 'opacity:.45;pointer-events:none',
+      addConfigured: () => { if (canAdd) addItem('cart'); }, buyNow: () => { if (canAdd) addItem('checkout'); },
+      backTab: () => this.setState(st => ({ screen: st.tab || 'home' })), bookmark: () => this.showToast('Saved to wishlist'),
+      // cart
+      cartItems, cartEmpty: s.cart.length === 0, cartFull: s.cart.length > 0,
+      subtotal: subtotal.toLocaleString('en-IN'), gst: gst.toLocaleString('en-IN'), deliveryLabel: fee ? '₹' + fee : 'FREE', couponOk: s.couponOk, grandTotal: grand.toLocaleString('en-IN'),
+      coupon: s.coupon, onCoupon: (e) => this.setState({ coupon: e.target.value }), applyCoupon: () => { const ok = (s.coupon || '').toUpperCase().trim() === 'PRINT150'; this.setState({ couponOk: ok }); this.showToast(ok ? 'Coupon applied — ₹150 off' : 'Invalid coupon code'); },
+      toCheckout: () => this.setState({ screen: 'checkout' }),
+      // checkout
+      backCart: () => this.setState({ screen: 'cart', tab: 'cart' }), slots, pays, grandTotalLabel: '₹' + grand.toLocaleString('en-IN'),
+      slideVal: s.slideVal, knobStyle: 'transform:translateX(' + (s.slideVal * 2.6) + 'px)',
+      onSlide: (e) => { const v = +e.target.value; if (v >= 96) { this.placeOrder(); } else { this.setState({ slideVal: v }); } },
+      onSlideEnd: (e) => { if (+e.target.value < 96) this.setState({ slideVal: 0 }); },
+      toastSoon: () => this.showToast('Coming soon in the full build'),
+      // tracking
+      orderList, trackId: cur ? cur.id : '—', trackStageTitle: STAGES[cstage][0], trackStageDesc: STAGES[cstage][1], trackBar: 'width:' + (cstage / 5 * 100) + '%', trackEta: etaTxt,
+      proofVisible: cstage >= 3, proofSrc: 'https://picsum.photos/seed/pe-proof-' + (cur ? cur.id : '1') + '/700/500', timeline
+    };
+  }
+}
+</script>
+</body>
+</html>

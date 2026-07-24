@@ -14,6 +14,11 @@
 .DS_Store
 *.pem
 
+# secrets / personal credentials — never commit
+credentials.txt
+**/credentials.txt
+*.credentials
+
 # debug
 npm-debug.log*
 yarn-debug.log*

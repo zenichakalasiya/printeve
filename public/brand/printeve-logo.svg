@@ -1,0 +1,12 @@
+<svg viewBox="200 300 630 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PrintEve">
+  <!-- PrintEve mark — angular green dove, right-facing, swept wings + forked tail.
+       Single brand-green fill on transparent. Interim recreation of the brand logo. -->
+  <g fill="#28C24C">
+    <!-- upper wing -->
+    <path d="M232 332 L590 432 L560 460 L360 452 Z" />
+    <!-- lower wing with hooked tip -->
+    <path d="M285 492 L590 505 L560 548 L505 516 L300 512 Z" />
+    <!-- body + head + beak + forked tail -->
+    <path d="M588 430 L700 430 L728 452 L772 445 L700 500 L650 558 L600 650 L560 600 L432 690 L520 585 L588 505 Z" />
+  </g>
+</svg>
